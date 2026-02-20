@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Node / frontend
+node_modules
+.next
+dist
+build
+out
+
+# Python / backend
+__pycache__/
+*.pyc
+venv/
+.env
+.env.*
+
+# Logs
+*.log

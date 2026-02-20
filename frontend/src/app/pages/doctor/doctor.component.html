@@ -1,0 +1,48 @@
+<div class="container" *ngIf="doctor() as d">
+    <div class="top card">
+      <a class="back" routerLink="/search">←</a>
+  
+      <div class="header">
+        <div class="avatar"></div>
+        <div class="info">
+          <div class="name">{{ d.fullName }}</div>
+          <div class="meta">{{ d.specialty }}</div>
+          <div class="sub">{{ d.clinic }}, {{ d.city }}</div>
+        </div>
+      </div>
+  
+      <div class="block">
+        <div class="label">Disponibilités</div>
+  
+        <div class="days">
+          <button
+            class="day"
+            *ngFor="let a of d.availability; let i = index"
+            [class.active]="i === dayIndex()"
+            (click)="selectDay(i)"
+          >
+            <div class="dayNum">{{ a.dayNumber }}</div>
+            <div class="dayLab">{{ a.dayLabel }}</div>
+          </button>
+        </div>
+  
+        <div class="label" style="margin-top:10px;">Heure</div>
+  
+        <div class="times" *ngIf="d.availability?.length">
+          <button
+            class="time"
+            *ngFor="let t of d.availability![dayIndex()].times"
+            [class.active]="t === time()"
+            (click)="selectTime(t)"
+          >
+            {{ t }}
+          </button>
+        </div>
+      </div>
+  
+      <button class="cta" (click)="goConfirm()" [disabled]="!time()">
+        Prendre un rendez-vous
+      </button>
+    </div>
+  </div>
+  

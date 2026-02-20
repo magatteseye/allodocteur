@@ -1,0 +1,27 @@
+<mat-toolbar class="topbar">
+    <div class="container bar">
+      <a class="brand" routerLink="/">
+        <span class="logo"></span>
+        <span class="name">AlloDocteur</span>
+      </a>
+  
+      <nav class="menu">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Accueil</a>
+        <a routerLink="/search" routerLinkActive="active">Recherche</a>
+        <a routerLink="/confirm" routerLinkActive="active">Rendez-vous</a>
+        <a routerLink="/login" routerLinkActive="active">Profil</a>
+      </nav>
+  
+      <div class="actions">
+        <a mat-stroked-button color="primary" routerLink="/login" class="btn">Se connecter</a>
+      </div>
+    </div>
+  </mat-toolbar>
+  
+  <div class="page">
+    <router-outlet></router-outlet>
+  </div>
+  
+  <app-bottom-nav></app-bottom-nav>
+  <app-footer></app-footer>
+  

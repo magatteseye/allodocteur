@@ -1,0 +1,48 @@
+<div class="container">
+  <ng-container *ngIf="draft() as d; else noDraft">
+    <div class="card box">
+      <div class="title">Confirmer votre rendez-vous</div>
+
+      <div class="docRow">
+        <div class="avatar"></div>
+        <div>
+          <div class="docName">{{ d.doctorName }}</div>
+          <div class="docMeta">{{ d.specialty }}</div>
+        </div>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="when">{{ d.dateLabel }} à {{ d.time }}</div>
+
+      <div class="ticket">
+        <div class="t1">Montant à payer</div>
+        <div class="t2">{{ d.priceCfa | number }} CFA</div>
+      </div>
+
+      <div class="note">
+        Paiement sécurisé par carte via Stripe
+      </div>
+
+      <button class="cta" type="button" [disabled]="loading()" (click)="confirm()">
+        {{ loading() ? 'Redirection...' : 'Payer avec Stripe' }}
+      </button>
+
+      <div class="err" *ngIf="error()">{{ error() }}</div>
+    </div>
+  </ng-container>
+
+  <ng-template #noDraft>
+    <div class="card box">
+      <div class="title">Rendez-vous</div>
+      <div class="small" style="margin-top:8px;">
+        Sélectionne d’abord un médecin et une heure, puis reviens ici.
+      </div>
+
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="cta" type="button" (click)="goSearch()">Aller à la recherche</button>
+        <button class="done" type="button" (click)="goMyAppointments()">Voir mes rendez-vous</button>
+      </div>
+    </div>
+  </ng-template>
+</div>

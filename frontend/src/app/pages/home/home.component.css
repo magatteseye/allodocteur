@@ -1,0 +1,36 @@
+.hero{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  align-items:center;
+  gap: 18px;
+  padding: 26px;
+}
+
+h1{
+  margin:0;
+  font-size: 34px;
+  line-height: 1.05;
+  letter-spacing: -0.6px;
+}
+
+.cta{
+  margin-top: 16px;
+  border-radius: 14px;
+  font-weight: 900;
+}
+
+.illu{
+  height: 260px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(30,107,255,.20), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgba(106,166,255,.22), transparent 55%),
+    #F2F6FF;
+  border: 1px solid var(--border);
+}
+
+@media(max-width:900px){
+  .hero{ grid-template-columns: 1fr; }
+  .illu{ height: 220px; }
+  h1{ font-size: 28px; }
+}

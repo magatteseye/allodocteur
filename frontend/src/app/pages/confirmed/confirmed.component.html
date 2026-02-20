@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="card box">
+    <div class="title">Confirmation</div>
+
+    <div *ngIf="loading()">Chargement…</div>
+
+    <div *ngIf="!loading() && error()" class="err">{{ error() }}</div>
+
+    <div *ngIf="!loading() && data() as d">
+      <div class="ok" *ngIf="d.paymentStatus === 'PAID'">
+        ✅ Paiement réussi — Rendez-vous confirmé
+      </div>
+
+      <div class="pending" *ngIf="d.paymentStatus !== 'PAID'">
+        ⏳ Paiement en attente
+      </div>
+
+      <div class="line"></div>
+
+      <div class="row"><b>Médecin :</b> {{ d.doctor?.fullName }}</div>
+      <div class="row"><b>Spécialité :</b> {{ d.doctor?.specialty }}</div>
+      <div class="row"><b>Date :</b> {{ d.dateTime | date:'full':'':'fr-FR' }}</div>
+      <div class="row"><b>Montant :</b> {{ d.amountCfa | number }} CFA</div>
+      <div class="row"><b>Statut :</b> {{ d.appointmentStatus }}</div>
+
+      <div class="actions">
+        <a routerLink="/rendezvous" class="btn primary">Voir mes rendez-vous</a>
+        <a routerLink="/search" class="btn">Prendre un autre rendez-vous</a>
+      </div>
+    </div>
+  </div>
+</div>

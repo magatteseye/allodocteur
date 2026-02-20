@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="card box">
+      <div class="title">Connexion</div>
+  
+      <div class="modes">
+        <button class="mode" [class.active]="form.value.mode==='PATIENT'" (click)="switchMode('PATIENT')" type="button">
+          Patient
+        </button>
+        <button class="mode" [class.active]="form.value.mode==='HOSPITAL'" (click)="switchMode('HOSPITAL')" type="button">
+          Hôpital
+        </button>
+      </div>
+  
+      <label>Email</label>
+      <input class="inp" type="email" [formControl]="form.controls.email" />
+  
+      <label>Mot de passe</label>
+      <input class="inp" type="password" [formControl]="form.controls.password" />
+  
+      <button class="cta" (click)="login()">Se connecter</button>
+  
+      <div class="hint">
+        Démo patient : patient&#64;demo.com / Patient123! <br />
+        Démo hôpital : hospital&#64;demo.com / Hospital123!
+      </div>
+      
+  
+      <div class="err" *ngIf="err()">{{ err() }}</div>
+    </div>
+  </div>
+  

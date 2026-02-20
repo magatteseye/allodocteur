@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="hello">Bonjour <span>{{ name() }}</span></div>
+    Bonjour <b>{{ fullName }}</b>
+
+  
+    <!-- ✅ formGroup doit être sur le form -->
+    <form class="searchCard card" [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="f">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput placeholder="Choisir une spécialité" formControlName="specialty" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="f">
+        <mat-icon matPrefix>location_on</mat-icon>
+        <input matInput placeholder="Dakar" formControlName="city" />
+      </mat-form-field>
+  
+      <button mat-flat-button color="primary" class="btn" type="submit">Rechercher</button>
+    </form>
+  
+    <div class="sectionTitle">Spécialiste Populaire</div>
+    <mat-chip-listbox class="chips">
+      <mat-chip-option class="chip" *ngFor="let s of specialties" (click)="setSpecialty(s)">
+        {{ s }}
+      </mat-chip-option>
+    </mat-chip-listbox>
+  
+    <div class="sectionTitle">Service généraliste</div>
+  
+    <div class="list" *ngIf="!loading(); else loadingTpl">
+      <div class="docCard card" *ngFor="let d of doctors()">
+        <div class="docLeft">
+          <div class="avatar"></div>
+          <div>
+            <div class="docName">{{ d.fullName }}</div>
+            <div class="docMeta">{{ d.specialty }}</div>
+            <div class="docSub">{{ d.clinic }}, {{ d.city }}</div>
+          </div>
+        </div>
+  
+        <a class="docBtn" [routerLink]="['/doctor', d.id]">Voir disponibilités</a>
+      </div>
+  
+      <div class="empty card" *ngIf="doctors().length === 0">
+        Aucun résultat.
+      </div>
+    </div>
+  
+    <ng-template #loadingTpl>
+      <div class="empty card">Chargement…</div>
+    </ng-template>
+  </div>
+  

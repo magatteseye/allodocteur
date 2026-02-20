@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="head">
+      <div>
+        <div class="kicker">Mon espace</div>
+        <h1>Mes rendez-vous</h1>
+      </div>
+      <button class="mini" type="button" (click)="load()">Actualiser</button>
+    </div>
+  
+    <div class="card box" *ngIf="loading()">
+      <div class="muted">Chargement...</div>
+    </div>
+  
+    <div class="card box" *ngIf="error() && !loading()">
+      <div class="err">{{ error() }}</div>
+      <button class="cta" type="button" (click)="goSearch()">Chercher un médecin</button>
+    </div>
+  
+    <ng-container *ngIf="!loading() && !error()">
+      <div class="sectionTitle">À venir</div>
+      <div class="card appt" *ngFor="let a of upcoming()">
+        <div class="top">
+          <div>
+            <div class="doc">{{ a.doctor?.fullName }}</div>
+            <div class="meta">{{ a.doctor?.specialty }} · {{ a.doctor?.clinic }} · {{ a.doctor?.city }}</div>
+          </div>
+          <span class="badge" [ngClass]="badgeClass(a.status)">{{ a.status }}</span>
+        </div>
+  
+        <div class="date">{{ a.dateTime | date:'fullDate':'':'fr-FR' }} · {{ a.dateTime | date:'shortTime' }}</div>
+        <div class="meta">Paiement : {{ a.paymentStatus || 'PENDING' }}</div>
+  
+        <div class="actions">
+          <button class="mini" type="button" *ngIf="canCancel(a)" (click)="cancel(a.id)">Annuler</button>
+        </div>
+      </div>
+  
+      <div class="empty card box" *ngIf="upcoming().length === 0">
+        Aucun rendez-vous à venir.
+      </div>
+  
+      <div class="sectionTitle" style="margin-top:16px;">Historique</div>
+      <div class="card appt" *ngFor="let a of history()">
+        <div class="top">
+          <div>
+            <div class="doc">{{ a.doctor?.fullName }}</div>
+            <div class="meta">{{ a.doctor?.specialty }} · {{ a.doctor?.clinic }} · {{ a.doctor?.city }}</div>
+          </div>
+          <span class="badge" [ngClass]="badgeClass(a.status)">{{ a.status }}</span>
+        </div>
+  
+        <div class="date">{{ a.dateTime | date:'medium':'':'fr-FR' }}</div>
+        <div class="meta">Paiement : {{ a.paymentStatus || 'PENDING' }}</div>
+      </div>
+  
+      <div class="empty card box" *ngIf="history().length === 0">
+        Pas encore d’historique.
+      </div>
+    </ng-container>
+  </div>

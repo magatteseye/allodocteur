@@ -1,0 +1,304 @@
+<div class="container">
+  <div class="adminHead">
+    <div>
+      <div class="kicker">Espace Hôpital</div>
+      <h1>Dashboard</h1>
+      <div class="sub">Gérez vos médecins, disponibilités et rendez-vous.</div>
+    </div>
+
+    <div class="headActions">
+      <a mat-stroked-button color="primary" routerLink="/login" class="btn">Se connecter</a>
+      <button mat-flat-button color="primary" class="btn" type="button" (click)="refreshAll()">
+        <mat-icon>refresh</mat-icon>
+        Actualiser
+      </button>
+    </div>
+  </div>
+
+  <div class="error card" *ngIf="errorMsg()">
+    <mat-icon>error_outline</mat-icon>
+    <div>{{ errorMsg() }}</div>
+  </div>
+
+  <div class="success card" *ngIf="successMsg()">
+    <mat-icon>check_circle</mat-icon>
+    <div>{{ successMsg() }}</div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="card stat">
+      <div class="ico"><mat-icon>medical_services</mat-icon></div>
+      <div>
+        <div class="n">{{ doctorsCount() }}</div>
+        <div class="t">Médecins</div>
+      </div>
+    </div>
+
+    <div class="card stat">
+      <div class="ico"><mat-icon>event</mat-icon></div>
+      <div>
+        <div class="n">{{ appointmentsCount() }}</div>
+        <div class="t">Rendez-vous</div>
+      </div>
+    </div>
+
+    <div class="card stat">
+      <div class="ico warn"><mat-icon>schedule</mat-icon></div>
+      <div>
+        <div class="n">{{ pendingCount() }}</div>
+        <div class="t">En attente</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading card" *ngIf="loading()">
+    <mat-spinner diameter="28"></mat-spinner>
+    <span>Chargement…</span>
+  </div>
+
+  <!-- Doctors -->
+  <div class="card section" *ngIf="!loading()">
+    <div class="sectionTitle">
+      <span>Médecins</span>
+      <button mat-flat-button color="primary" class="btnSmall" type="button" (click)="openAdd()">
+        <mat-icon>add</mat-icon>
+        Ajouter un médecin
+      </button>
+    </div>
+
+    <div class="tableWrap" *ngIf="doctors().length > 0; else emptyDocs">
+      <table mat-table [dataSource]="doctors()" class="mat-elevation-z0 table">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nom</th>
+          <td mat-cell *matCellDef="let d">
+            <div class="rowMain">
+              <span class="avatar"></span>
+              <div>
+                <div class="strong">{{ d.fullName }}</div>
+                <div class="muted small">{{ d.specialty }}</div>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="specialty">
+          <th mat-header-cell *matHeaderCellDef>Spécialité</th>
+          <td mat-cell *matCellDef="let d">{{ d.specialty }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="clinic">
+          <th mat-header-cell *matHeaderCellDef>Clinique</th>
+          <td mat-cell *matCellDef="let d">{{ d.clinic }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef>Ville</th>
+          <td mat-cell *matCellDef="let d">{{ d.city }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Prix</th>
+          <td mat-cell *matCellDef="let d"><b>{{ d.priceCfa | number }}</b> CFA</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let d" class="actionsCell">
+            <button mat-stroked-button color="primary" type="button" (click)="openEdit(d)">
+              <mat-icon>edit</mat-icon> Modifier
+            </button>
+            <button mat-stroked-button color="warn" type="button" (click)="deleteDoctor(d)">
+              <mat-icon>delete</mat-icon> Supprimer
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="doctorColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: doctorColumns;"></tr>
+      </table>
+    </div>
+
+    <ng-template #emptyDocs>
+      <div class="empty">Aucun médecin. Clique sur “Ajouter un médecin”.</div>
+    </ng-template>
+  </div>
+
+  <!-- Form -->
+  <div class="card section" *ngIf="!loading() && showForm()">
+    <div class="sectionTitle">
+      <span *ngIf="mode()==='ADD'">Ajouter un médecin</span>
+      <span *ngIf="mode()==='EDIT'">Modifier un médecin</span>
+      <button mat-stroked-button color="primary" class="btnSmall" type="button" (click)="closeForm()">Fermer</button>
+    </div>
+
+    <form class="form" [formGroup]="doctorForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Nom complet</mat-label>
+        <input matInput formControlName="fullName" placeholder="Dr Awa Diop" />
+      </mat-form-field>
+
+      <div class="row2">
+        <mat-form-field appearance="outline">
+          <mat-label>Spécialité</mat-label>
+          <mat-select formControlName="specialty">
+            <mat-option *ngFor="let s of specialties" [value]="s">{{ s }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Prix (CFA)</mat-label>
+          <input matInput type="number" formControlName="priceCfa" />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Clinique</mat-label>
+        <input matInput formControlName="clinic" placeholder="Clinique Saint Michel" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Ville</mat-label>
+        <input matInput formControlName="city" placeholder="Dakar" />
+      </mat-form-field>
+    </form>
+
+    <!-- About -->
+    <div class="sectionTitle" style="margin-top:10px;">
+      <span>À propos</span><span class="muted">chips</span>
+    </div>
+
+    <div class="aboutRow">
+      <mat-form-field appearance="outline" class="grow">
+        <mat-label>Ajouter un point</mat-label>
+        <input matInput [value]="aboutInput()" (input)="aboutInput.set(($any($event.target).value))" />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" class="pill" type="button" (click)="addAbout()">
+        <mat-icon>add</mat-icon> Ajouter
+      </button>
+    </div>
+
+    <mat-chip-listbox class="chips">
+      <mat-chip-option *ngFor="let p of aboutPoints()" (removed)="removeAbout(p)" removable>
+        {{ p }} <mat-icon matChipRemove>close</mat-icon>
+      </mat-chip-option>
+    </mat-chip-listbox>
+
+    <!-- ✅ Disponibilités avec calendrier -->
+    <div class="sectionTitle" style="margin-top:10px;">
+      <span>Disponibilités</span>
+      <span class="muted">calendrier + heures (auto)</span>
+    </div>
+
+    <div class="row2">
+      <mat-form-field appearance="outline">
+        <mat-label>Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [value]="selectedDate()"
+          (dateChange)="onDateSelected($event.value)"
+          placeholder="Choisir une date"
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Heures disponibles</mat-label>
+        <mat-select
+          multiple
+          [value]="currentTimes()"
+          (selectionChange)="onTimesChange($any($event.value))"
+        >
+          <mat-option *ngFor="let t of timeSlots" [value]="t">{{ t }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="timesChips">
+      <span class="chipTime" *ngFor="let t of currentTimes()">
+        {{ t }} <button class="x" type="button" (click)="removeTime(t)">×</button>
+      </span>
+    </div>
+
+    <!-- Liste des disponibilités -->
+    <div class="availList">
+      <div class="availCard" *ngFor="let a of availability()">
+        <div class="availTop">
+          <div class="strong">{{ a.dayLabel }} {{ a.dayNumber }}</div>
+          <button class="mini" type="button" (click)="removeDayBlock(a)">Supprimer</button>
+        </div>
+        <div class="timesChips">
+          <span class="chipTime" *ngFor="let t of a.times">{{ t }}</span>
+        </div>
+      </div>
+    </div>
+
+    <button mat-flat-button color="primary" class="fullBtn big" type="button" (click)="saveDoctor()">
+      <mat-icon>check</mat-icon>
+      <span *ngIf="mode()==='ADD'">Enregistrer</span>
+      <span *ngIf="mode()==='EDIT'">Mettre à jour</span>
+    </button>
+  </div>
+</div>
+
+<!-- ✅ Rendez-vous / Patients -->
+<div class="card section" *ngIf="!loading()">
+  <div class="sectionTitle">
+    <span>Rendez-vous (Patients)</span>
+    <span class="muted">{{ appointments().length }} au total</span>
+  </div>
+
+  <div class="tableWrap" *ngIf="appointments().length > 0; else emptyAppts">
+    <table mat-table [dataSource]="appointments()" class="mat-elevation-z0 table">
+      <!-- Date -->
+      <ng-container matColumnDef="when">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let a">{{ fmtDate(a.dateTime) }}</td>
+      </ng-container>
+
+      <!-- Médecin -->
+      <ng-container matColumnDef="doctor">
+        <th mat-header-cell *matHeaderCellDef>Médecin</th>
+        <td mat-cell *matCellDef="let a">
+          <div class="strong">{{ a.doctor?.fullName || '—' }}</div>
+          <div class="muted small">
+            {{ a.doctor?.specialty || '' }} · {{ a.doctor?.clinic || '' }} · {{ a.doctor?.city || '' }}
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Patient -->
+      <ng-container matColumnDef="patient">
+        <th mat-header-cell *matHeaderCellDef>Patient</th>
+        <td mat-cell *matCellDef="let a">
+          <div class="strong">{{ a.patient?.fullName || '—' }}</div>
+          <div class="muted small">{{ a.patient?.email || '' }}</div>
+        </td>
+      </ng-container>
+
+      <!-- Statut -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Statut</th>
+        <td mat-cell *matCellDef="let a">
+          <span class="badge" [ngClass]="badgeClass(a.status)">{{ a.status }}</span>
+        </td>
+      </ng-container>
+
+      <!-- Paiement -->
+      <ng-container matColumnDef="payment">
+        <th mat-header-cell *matHeaderCellDef>Paiement</th>
+        <td mat-cell *matCellDef="let a">{{ a.paymentMethod || '—' }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="appointmentColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: appointmentColumns;"></tr>
+    </table>
+  </div>
+
+  <ng-template #emptyAppts>
+    <div class="empty">Aucun rendez-vous pour le moment.</div>
+  </ng-template>
+</div>

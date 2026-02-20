@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="card" style="padding:16px; max-width:700px; margin:0 auto;">
+    <h2 style="margin:0 0 10px;">Confirmation du rendez-vous</h2>
+
+    <div *ngIf="loading()">Chargement...</div>
+    <div *ngIf="error()" style="color:#b91c1c; font-weight:700;">{{ error() }}</div>
+
+    <ng-container *ngIf="!loading() && data() as d">
+      <p><b>Paiement :</b> {{ d.paymentStatus || d.paymentStatus }}</p>
+      <p><b>Rendez-vous :</b> {{ d.appointmentStatus || d.status }}</p>
+
+      <p *ngIf="d.doctor?.fullName"><b>Médecin :</b> {{ d.doctor.fullName }}</p>
+      <p *ngIf="d.dateTime"><b>Date :</b> {{ d.dateTime | date:'fullDate':'':'fr-FR' }} - {{ d.dateTime | date:'shortTime' }}</p>
+      <p *ngIf="d.amountCfa"><b>Montant :</b> {{ d.amountCfa | number }} CFA</p>
+
+      <a routerLink="/rendezvous">Voir mes rendez-vous</a>
+    </ng-container>
+  </div>
+</div>

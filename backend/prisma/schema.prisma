@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+enum Role {
+  PATIENT
+  HOSPITAL
+}
+
+
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  fullName  String
+  role      Role     @default(PATIENT)
+
+  hospital  Hospital?
+  doctors   Doctor[] @relation("HospitalDoctors")
+  appts     Appointment[] @relation("PatientAppointments")
+
+  createdAt DateTime @default(now())
+}
+
+model Hospital {
+  id        String @id @default(cuid())
+  name      String
+  userId    String @unique
+  user      User   @relation(fields: [userId], references: [id])
+}
+
+model Doctor {
+  id               String   @id @default(cuid())
+  fullName         String
+  specialty        String
+  clinic           String
+  city             String
+  priceCfa         Int
+
+  aboutJson        String
+  availabilityJson String
+
+  hospitalUserId   String
+  hospitalUser     User     @relation("HospitalDoctors", fields: [hospitalUserId], references: [id])
+
+  appts            Appointment[]
+  createdAt        DateTime @default(now())
+}
+
+
+
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+model Appointment {
+  id                    String            @id @default(cuid())
+
+  patientId              String
+  patient                User              @relation("PatientAppointments", fields: [patientId], references: [id])
+
+  doctorId               String
+  doctor                 Doctor            @relation(fields: [doctorId], references: [id])
+
+  dateTime               DateTime
+  status                 AppointmentStatus @default(PENDING)
+
+  confirmToken           String            @unique
+
+  // ✅ Paiement
+  paymentMethod          String?
+  paymentStatus          PaymentStatus     @default(PENDING)
+  paymentRef             String?           @unique
+  amountCfa              Int?
+  currency               String?
+  stripeSessionId        String?           @unique
+  stripePaymentIntentId  String?           @unique
+  paidAt                 DateTime?
+
+  createdAt              DateTime          @default(now())
+}

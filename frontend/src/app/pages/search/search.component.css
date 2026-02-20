@@ -1,0 +1,86 @@
+.hello{
+  font-weight:900;
+  font-size:18px;
+  margin-bottom:10px;
+}
+.hello span{ color: var(--primary); }
+
+.searchCard{
+  padding: 12px;
+  display:grid;
+  grid-template-columns: 1fr 1fr 160px;
+  gap: 10px;
+  align-items:center;
+}
+
+.f{ width:100%; }
+.btn{
+  height:56px;
+  border-radius:14px;
+  font-weight:900;
+}
+
+.sectionTitle{
+  margin-top: 14px;
+  font-weight:900;
+  font-size:13px;
+  color:#334155;
+}
+
+.chips{
+  margin-top: 10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.chip{ font-weight:900; }
+
+.list{
+  margin-top: 12px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.docCard{
+  padding: 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.docLeft{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.avatar{
+  width:42px;height:42px;border-radius:18px;
+  background: linear-gradient(135deg, rgba(30,107,255,.22), rgba(106,166,255,.22));
+}
+
+.docName{ font-weight:900; }
+.docMeta{ color: var(--muted); font-weight:800; font-size:12px; }
+.docSub{ color:#64748b; font-weight:800; font-size:12px; }
+
+.docBtn{
+  text-decoration:none;
+  background: var(--primary);
+  color:#fff;
+  font-weight:900;
+  padding: 10px 12px;
+  border-radius: 14px;
+  white-space: nowrap;
+}
+
+.empty{ padding: 14px; color: var(--muted); font-weight:800; }
+
+@media(max-width:900px){
+  .searchCard{ grid-template-columns: 1fr; }
+  .btn{ width:100%; }
+  .docCard{ flex-direction:column; align-items:flex-start; }
+  .docBtn{ width:100%; text-align:center; }
+}

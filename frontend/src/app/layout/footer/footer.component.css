@@ -1,0 +1,46 @@
+.footer{
+    background:#fff;
+    border-top:1px solid var(--border);
+    margin-top: 22px;
+    padding-bottom: 78px; /* pour ne pas cacher avec bottom nav */
+  }
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:18px;
+    padding: 22px 0;
+  }
+  .t{
+    font-weight:900;
+    font-size:13px;
+    margin-bottom:10px;
+  }
+  .footer a{
+    display:block;
+    text-decoration:none;
+    color:#475569;
+    font-weight:700;
+    font-size:13px;
+    margin: 8px 0;
+  }
+  .footer a:hover{ color: var(--primary); }
+  
+  .bottom{
+    border-top:1px solid var(--border);
+    padding: 14px 0 22px;
+    color: var(--muted);
+    font-weight:800;
+    font-size:12px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .sep{ opacity:.7; }
+  
+  @media(max-width:900px){
+    .grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media(max-width:520px){
+    .grid{ grid-template-columns: 1fr; }
+  }
+  
