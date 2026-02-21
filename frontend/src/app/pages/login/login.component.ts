@@ -1,47 +1,46 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   standalone: true,
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   err = signal('');
+  loading = false;
+  showPwd = false;
 
   form = this.fb.group({
-    mode: ['PATIENT', Validators.required], // PATIENT | HOSPITAL
-    email: ['patient@demo.com', [Validators.required]],
-    password: ['Patient123!', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]],
   });
 
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {}
 
-  switchMode(mode: 'PATIENT' | 'HOSPITAL') {
-    this.form.patchValue({
-      mode,
-      email: mode === 'HOSPITAL' ? 'hospital@demo.com' : 'patient@demo.com',
-      password: mode === 'HOSPITAL' ? 'Hospital123!' : 'Patient123!',
-    });
-  }
-
   login() {
+    if (this.loading || this.form.invalid) return;
+
     this.err.set('');
+    this.loading = true;
+
     const v = this.form.value;
 
     this.auth.login(v.email || '', v.password || '').subscribe({
       next: (res) => {
         this.auth.setSession(res);
-        // redirection selon rôle réel renvoyé par backend
-        if (res.role === 'HOSPITAL') this.router.navigateByUrl('/admin');
-        else this.router.navigateByUrl('/search');
+        this.router.navigateByUrl('/search'); // Patient flow
       },
-      error: () => this.err.set('Identifiants invalides'),
+      error: () => {
+        this.err.set('Email ou mot de passe incorrect');
+        this.loading = false;
+      },
+      complete: () => (this.loading = false),
     });
   }
 }

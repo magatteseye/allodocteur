@@ -1,31 +1,75 @@
-<div class="container">
-    <div class="card box">
-      <div class="title">Connexion</div>
-  
-      <div class="modes">
-        <button class="mode" [class.active]="form.value.mode==='PATIENT'" (click)="switchMode('PATIENT')" type="button">
-          Patient
-        </button>
-        <button class="mode" [class.active]="form.value.mode==='HOSPITAL'" (click)="switchMode('HOSPITAL')" type="button">
-          Hôpital
-        </button>
+<div class="auth">
+  <div class="card box">
+    <div class="head">
+      <div class="brand">
+        <div class="logo">AD</div>
+        <div>
+          <div class="name">AlloDocteur</div>
+          <div class="sub">Premier au Sénégal • Disponible à Dakar</div>
+        </div>
       </div>
-  
+
+      <div class="hgroup">
+        <h1>Connexion Patient</h1>
+        <p>Connectez-vous pour réserver et gérer vos rendez-vous.</p>
+      </div>
+    </div>
+
+    <div class="alert" *ngIf="err()">
+      <span class="aico">⚠️</span>
+      <span>{{ err() }}</span>
+    </div>
+
+    <div class="field">
       <label>Email</label>
-      <input class="inp" type="email" [formControl]="form.controls.email" />
-  
-      <label>Mot de passe</label>
-      <input class="inp" type="password" [formControl]="form.controls.password" />
-  
-      <button class="cta" (click)="login()">Se connecter</button>
-  
-      <div class="hint">
-        Démo patient : patient&#64;demo.com / Patient123! <br />
-        Démo hôpital : hospital&#64;demo.com / Hospital123!
+      <div class="control">
+        <span class="ico">✉️</span>
+        <input
+          class="inp"
+          type="email"
+          placeholder="nom@exemple.com"
+          [formControl]="form.controls.email"
+          autocomplete="email"
+          (keydown.enter)="login()"
+        />
       </div>
-      
-  
-      <div class="err" *ngIf="err()">{{ err() }}</div>
+    </div>
+
+    <div class="field">
+      <label>Mot de passe</label>
+      <div class="control">
+        <span class="ico">🔒</span>
+        <input
+          class="inp"
+          [type]="showPwd ? 'text' : 'password'"
+          placeholder="Votre mot de passe"
+          [formControl]="form.controls.password"
+          autocomplete="current-password"
+          (keydown.enter)="login()"
+        />
+        <button type="button" class="ghost" (click)="showPwd = !showPwd">
+          {{ showPwd ? 'Masquer' : 'Afficher' }}
+        </button>
+      </div>
+
+      <div class="links">
+        <a routerLink="/forgot-password" class="link">Mot de passe oublié ?</a>
+      </div>
+    </div>
+
+    <button class="btn" (click)="login()" [disabled]="loading || form.invalid">
+      <span *ngIf="!loading">Se connecter</span>
+      <span *ngIf="loading">Connexion…</span>
+    </button>
+
+    <div class="foot">
+      <span>Pas encore de compte ?</span>
+      <a routerLink="/register" class="link strong">Créer un compte</a>
+    </div>
+
+    <div class="small-note">
+      Vous êtes une clinique / médecin ?
+      <a routerLink="/contact" class="link">Devenir partenaire</a>
     </div>
   </div>
-  
+</div>

@@ -1,9 +1,10 @@
 <div class="container">
-  <!-- HERO -->
+  <!-- ✅ HERO (inchangé) -->
   <section class="hero card">
     <div class="left">
       <h1>Prenez rendez-vous<br />avec un médecin<br />facilement</h1>
 
+      <!-- ✅ Ajout léger sous le hero (sans casser ton design) -->
       <p class="hero-sub">
         <b>Premier au Sénégal</b> pour la prise de rendez-vous médicaux en ligne.
         <span class="tag">Disponible à Dakar pour le moment</span>
@@ -19,190 +20,89 @@
     </div>
   </section>
 
-  <!-- C’EST QUOI -->
-  <section class="section card explain">
-    <div class="explain-left">
-      <h2>C’est quoi AlloDocteur ?</h2>
-      <p class="explain-lead">
-        AlloDocteur vous permet de <b>trouver un médecin</b> et de <b>prendre rendez-vous en ligne</b>
-        en quelques clics — sans appels répétés, et avec des <b>rappels</b> pour éviter les oublis.
-        <span class="note">Pour le moment, le service est disponible à <b>Dakar</b>.</span>
-      </p>
-
-      <div class="explain-points">
-        <div class="point">
-          <div class="point-ico">📅</div>
-          <div>
-            <div class="point-title">Rendez-vous en ligne</div>
-            <div class="point-text">Choisissez un médecin et un créneau disponible.</div>
-          </div>
-        </div>
-
-        <div class="point">
-          <div class="point-ico">⏰</div>
-          <div>
-            <div class="point-title">Confirmation & rappels</div>
-            <div class="point-text">Recevez une confirmation et un rappel avant le rendez-vous.</div>
-          </div>
-        </div>
-
-        <div class="point">
-          <div class="point-ico">📍</div>
-          <div>
-            <div class="point-title">Dakar d’abord</div>
-            <div class="point-text">Lancement à Dakar, extension progressive ensuite.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="explain-right">
-      <div class="explain-illu">
-        <div class="bubble b1">
-          <div class="b-title">Étape 1</div>
-          <div class="b-text">Je choisis un médecin à Dakar</div>
-        </div>
-        <div class="bubble b2">
-          <div class="b-title">Étape 2</div>
-          <div class="b-text">Je réserve un créneau</div>
-        </div>
-        <div class="bubble b3">
-          <div class="b-title">Étape 3</div>
-          <div class="b-text">Je reçois une confirmation</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BANDEAU CONFIANCE -->
-  <section class="trust">
-    <div class="trust-item card">
-      <div class="trust-ico">🔒</div>
-      <div>
-        <div class="trust-title">Confidentialité</div>
-        <div class="trust-text">Respect des données personnelles</div>
-      </div>
-    </div>
-
-    <div class="trust-item card">
-      <div class="trust-ico">⏱️</div>
-      <div>
-        <div class="trust-title">Gain de temps</div>
-        <div class="trust-text">Moins d’attente, plus d’efficacité</div>
-      </div>
-    </div>
-
-    <div class="trust-item card">
-      <div class="trust-ico">📱</div>
-      <div>
-        <div class="trust-title">Mobile-first</div>
-        <div class="trust-text">Simple et facile sur téléphone</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LANCEMENT DAKAR -->
-  <section class="section card launch">
-    <div>
-      <h2>Lancement à Dakar</h2>
-      <p>
-        Nous démarrons à <b>Dakar</b> pour garantir un service fiable et une bonne expérience.
-        L’extension vers d’autres villes du Sénégal se fera progressivement.
-      </p>
-    </div>
-
-    <a mat-stroked-button routerLink="/contact" class="cta secondary">
-      Proposer une clinique
-    </a>
-  </section>
-
-  <!-- CAROUSEL : SERVICES -->
+  <!-- ✅ Social proof / Logos (simple, clean) -->
   <section class="section">
     <div class="section-head">
-      <h2>Découvrez AlloDocteur</h2>
-      <p>Une nouvelle façon simple de réserver vos soins à Dakar.</p>
+      <h2>Déjà adopté à Dakar</h2>
+      <p>Cliniques et cabinets qui rejoignent AlloDocteur (exemples).</p>
     </div>
 
-    <swiper-container
-      class="ad-carousel"
-      [slidesPerView]="1"
-      [spaceBetween]="12"
-      [pagination]="{ clickable: true }"
-      [navigation]="true"
-      [breakpoints]="{
-        '640': { 'slidesPerView': 1.2 },
-        '900': { 'slidesPerView': 2.2 },
-        '1200': { 'slidesPerView': 3 }
-      }"
-    >
-      <swiper-slide>
-        <div class="card slide">
-          <div class="slide-img real" style="background-image:url('assets/home/rdv.jpg')"></div>
-          <div class="slide-body">
-            <h3>Rendez-vous en ligne</h3>
-            <p>Réservez en quelques clics, sans appels ni attente.</p>
-            <a mat-stroked-button routerLink="/search" class="slide-btn">Rechercher</a>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="card slide">
-          <div class="slide-img real" style="background-image:url('assets/home/rappel.jpg')"></div>
-          <div class="slide-body">
-            <h3>Confirmation & rappels</h3>
-            <p>Recevez une confirmation et un rappel avant votre rendez-vous.</p>
-            <a mat-stroked-button routerLink="/search" class="slide-btn">Tester</a>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="card slide">
-          <div class="slide-img real" style="background-image:url('assets/home/mobilemoney.jpg')"></div>
-          <div class="slide-body">
-            <h3>Paiement Mobile Money</h3>
-            <p>Mobile Money peut être disponible selon les options activées.</p>
-            <a mat-stroked-button routerLink="/contact" class="slide-btn">Support</a>
-          </div>
-        </div>
-      </swiper-slide>
-    </swiper-container>
+    <div class="logos">
+      <div class="logo-card">Clinique A</div>
+      <div class="logo-card">Cabinet B</div>
+      <div class="logo-card">Centre C</div>
+      <div class="logo-card">Clinique D</div>
+      <div class="logo-card">Cabinet E</div>
+    </div>
   </section>
 
-  <!-- COMMENT ÇA MARCHE -->
-  <section class="section">
+  <!-- ✅ Features (cards) -->
+  <section class="section soft card">
     <div class="section-head">
-      <h2>Comment ça marche</h2>
-      <p>Simple, rapide, clair.</p>
+      <h2>Tout pour réserver sans stress</h2>
+      <p>Une expérience claire sur mobile, pensée pour Dakar.</p>
     </div>
 
     <div class="grid-3">
-      <div class="step card">
-        <div class="step-num">1</div>
-        <h3>Recherchez</h3>
-        <p>Trouvez un médecin à Dakar par spécialité et disponibilité.</p>
+      <div class="card feature">
+        <div class="ico">📅</div>
+        <h3>RDV en ligne</h3>
+        <p>Choisissez un médecin et un créneau disponible en quelques clics.</p>
       </div>
 
-      <div class="step card">
-        <div class="step-num">2</div>
-        <h3>Réservez</h3>
-        <p>Choisissez un créneau et confirmez votre rendez-vous.</p>
+      <div class="card feature">
+        <div class="ico">🔔</div>
+        <h3>Confirmation & rappels</h3>
+        <p>Recevez une confirmation et un rappel avant votre rendez-vous.</p>
       </div>
 
-      <div class="step card">
-        <div class="step-num">3</div>
-        <h3>Recevez un rappel</h3>
-        <p>Confirmation + rappel avant le rendez-vous.</p>
+      <div class="card feature">
+        <div class="ico">🔒</div>
+        <h3>Confidentialité</h3>
+        <p>La confidentialité et la protection des données sont une priorité.</p>
       </div>
     </div>
   </section>
 
-  <!-- SPÉCIALITÉS -->
+  <!-- ✅ Comment ça marche (style SaaS) -->
   <section class="section">
     <div class="section-head">
-      <h2>Spécialités populaires</h2>
-      <p>Commencez par une spécialité, puis choisissez un médecin à Dakar.</p>
+      <h2>Comment ça marche</h2>
+      <p>3 étapes, très simple.</p>
+    </div>
+
+    <div class="steps">
+      <div class="stepx card">
+        <div class="n">1</div>
+        <div>
+          <div class="st-title">Recherchez</div>
+          <div class="st-text">Trouvez un médecin à Dakar par spécialité et disponibilité.</div>
+        </div>
+      </div>
+
+      <div class="stepx card">
+        <div class="n">2</div>
+        <div>
+          <div class="st-title">Réservez</div>
+          <div class="st-text">Choisissez un créneau et confirmez votre rendez-vous.</div>
+        </div>
+      </div>
+
+      <div class="stepx card">
+        <div class="n">3</div>
+        <div>
+          <div class="st-title">Recevez un rappel</div>
+          <div class="st-text">On vous rappelle avant le rendez-vous pour éviter l’oubli.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Spécialités (chips) -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Spécialités populaires à Dakar</h2>
+      <p>Commencez par une spécialité.</p>
     </div>
 
     <div class="chips">
@@ -215,206 +115,113 @@
     </div>
   </section>
 
-  <!-- VILLES -->
-  <section class="section">
-    <div class="section-head">
-      <h2>Disponible à Dakar</h2>
-      <p>Lancement à Dakar. Extension progressive vers d’autres villes.</p>
+  <!-- ✅ FAQ -->
+<!-- ✅ Témoignages -->
+<!-- ✅ Témoignages -->
+<section class="section">
+  <div class="section-head">
+    <h2>Ils utilisent AlloDocteur</h2>
+    <p>Simple, rassurant, efficace.</p>
+  </div>
+
+  <div class="grid-3">
+    <div class="card testi">
+      <div class="testi-top">
+        <div class="avatar">A</div>
+        <div>
+          <div class="testi-name">Aminata</div>
+          <div class="testi-meta">Dakar</div>
+        </div>
+      </div>
+      <p class="testi-text">
+        J’ai trouvé un rendez-vous rapidement. La confirmation et le rappel m’ont vraiment aidée.
+      </p>
+      <div class="testi-foot">⭐️⭐️⭐️⭐️⭐️</div>
     </div>
 
-    <div class="grid-4">
-      <a class="city card" routerLink="/search">
-        <div class="city-name">Dakar</div>
-        <div class="city-meta">Disponible maintenant</div>
+    <div class="card testi">
+      <div class="testi-top">
+        <div class="avatar">M</div>
+        <div>
+          <div class="testi-name">Moussa</div>
+          <div class="testi-meta">Dakar</div>
+        </div>
+      </div>
+      <p class="testi-text">
+        Très pratique. Je peux réserver sans appeler et éviter l’attente au cabinet.
+      </p>
+      <div class="testi-foot">⭐️⭐️⭐️⭐️⭐️</div>
+    </div>
+
+    <div class="card testi">
+      <div class="testi-top">
+        <div class="avatar">F</div>
+        <div>
+          <div class="testi-name">Fatou</div>
+          <div class="testi-meta">Dakar</div>
+        </div>
+      </div>
+      <p class="testi-text">
+        Je vois les disponibilités facilement et je reçois un rappel avant le rendez-vous.
+      </p>
+      <div class="testi-foot">⭐️⭐️⭐️⭐️⭐️</div>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ Questions fréquentes -->
+<section class="section">
+  <div class="section-head">
+    <h2>Questions fréquentes</h2>
+    <p>Les réponses aux questions les plus fréquentes.</p>
+  </div>
+
+  <div class="faq">
+    <div class="card faq-item">
+      <div class="faq-q">Comment prendre rendez-vous ?</div>
+      <div class="faq-a">
+        Cliquez sur <b>Prendre Rendez-Vous</b>, recherchez un médecin à Dakar,
+        choisissez un créneau et confirmez.
+      </div>
+    </div>
+
+    <div class="card faq-item">
+      <div class="faq-q">Dans quelles villes c’est disponible ?</div>
+      <div class="faq-a">
+        Pour le moment, AlloDocteur est disponible à <b>Dakar</b>. Les autres villes arriveront progressivement.
+      </div>
+    </div>
+
+    <div class="card faq-item">
+      <div class="faq-q">Quels moyens de paiement sont acceptés ?</div>
+      <div class="faq-a">
+        Mobile Money peut être disponible selon les options activées sur la plateforme.
+      </div>
+    </div>
+
+    <div class="card faq-item">
+      <div class="faq-q">Mes informations sont-elles protégées ?</div>
+      <div class="faq-a">
+        Oui. La confidentialité et la protection des données sont une priorité.
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- ✅ CTA final (fort) -->
+  <section class="finalx card">
+    <div>
+      <h2>Prêt à réserver à Dakar ?</h2>
+      <p>Gagnez du temps dès maintenant avec AlloDocteur.</p>
+    </div>
+
+    <div class="final-actions">
+      <a mat-flat-button color="primary" routerLink="/search" class="cta">
+        Prendre RDV
       </a>
-
-      <div class="city card city-soon">
-        <div class="city-name">Thiès</div>
-        <div class="city-meta">Bientôt disponible</div>
-      </div>
-
-      <div class="city card city-soon">
-        <div class="city-name">Saint-Louis</div>
-        <div class="city-meta">Bientôt disponible</div>
-      </div>
-
-      <div class="city card city-soon">
-        <div class="city-name">Autres villes</div>
-        <div class="city-meta">Extension progressive</div>
-      </div>
+      <a mat-stroked-button routerLink="/contact" class="cta secondary">
+        Devenir partenaire
+      </a>
     </div>
   </section>
 
-  <!-- PARTENAIRES -->
-  <section class="section">
-    <div class="section-head">
-      <h2>Partenaires à Dakar</h2>
-      <p>Cliniques et professionnels qui rejoignent AlloDocteur.</p>
-    </div>
-
-    <swiper-container
-      class="partners-carousel"
-      [slidesPerView]="2"
-      [spaceBetween]="12"
-      [pagination]="{ clickable: true }"
-      [navigation]="true"
-      [breakpoints]="{
-        '640': { 'slidesPerView': 3 },
-        '900': { 'slidesPerView': 5 },
-        '1200': { 'slidesPerView': 6 }
-      }"
-    >
-      <swiper-slide><div class="card partner"><img src="assets/home/partners/p1.png" alt="Partenaire 1" /></div></swiper-slide>
-      <swiper-slide><div class="card partner"><img src="assets/home/partners/p2.png" alt="Partenaire 2" /></div></swiper-slide>
-      <swiper-slide><div class="card partner"><img src="assets/home/partners/p3.png" alt="Partenaire 3" /></div></swiper-slide>
-      <swiper-slide><div class="card partner"><img src="assets/home/partners/p4.png" alt="Partenaire 4" /></div></swiper-slide>
-      <swiper-slide><div class="card partner"><img src="assets/home/partners/p5.png" alt="Partenaire 5" /></div></swiper-slide>
-      <swiper-slide><div class="card partner"><img src="assets/home/partners/p6.png" alt="Partenaire 6" /></div></swiper-slide>
-    </swiper-container>
-  </section>
-
-  <!-- SECTION PRO -->
-  <section class="section card pro">
-    <div class="pro-left">
-      <h2>Vous êtes médecin ou clinique à Dakar ?</h2>
-      <p>
-        Rejoignez AlloDocteur pour mieux gérer votre agenda et recevoir des demandes de rendez-vous
-        de façon organisée.
-      </p>
-
-      <ul class="pro-list">
-        <li>Gestion d’agenda</li>
-        <li>Demandes centralisées</li>
-        <li>Rappels patients</li>
-        <li>Visibilité auprès des patients</li>
-      </ul>
-
-      <div class="pro-actions">
-        <a mat-flat-button color="primary" routerLink="/contact" class="cta">
-          Devenir partenaire
-        </a>
-      </div>
-    </div>
-
-    <div class="pro-right">
-      <div class="pro-mock"></div>
-    </div>
-  </section>
-
-  <!-- TÉMOIGNAGES -->
-  <section class="section">
-    <div class="section-head">
-      <h2>Ils utilisent AlloDocteur</h2>
-      <p>Simple, rassurant, efficace.</p>
-    </div>
-
-    <div class="grid-3">
-      <div class="card testi">
-        <div class="testi-top">
-          <div class="avatar">A</div>
-          <div>
-            <div class="testi-name">Aminata</div>
-            <div class="testi-meta">Dakar</div>
-          </div>
-        </div>
-        <p class="testi-text">
-          J’ai trouvé un rendez-vous rapidement. La confirmation et le rappel m’ont vraiment aidée.
-        </p>
-        <div class="testi-foot">⭐️⭐️⭐️⭐️⭐️</div>
-      </div>
-
-      <div class="card testi">
-        <div class="testi-top">
-          <div class="avatar">M</div>
-          <div>
-            <div class="testi-name">Moussa</div>
-            <div class="testi-meta">Dakar</div>
-          </div>
-        </div>
-        <p class="testi-text">
-          Très pratique. Je peux réserver sans appeler et éviter l’attente au cabinet.
-        </p>
-        <div class="testi-foot">⭐️⭐️⭐️⭐️⭐️</div>
-      </div>
-
-      <div class="card testi">
-        <div class="testi-top">
-          <div class="avatar">F</div>
-          <div>
-            <div class="testi-name">Fatou</div>
-            <div class="testi-meta">Dakar</div>
-          </div>
-        </div>
-        <p class="testi-text">
-          Je vois les disponibilités facilement et je reçois un rappel avant le rendez-vous.
-        </p>
-        <div class="testi-foot">⭐️⭐️⭐️⭐️⭐️</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section">
-    <div class="section-head">
-      <h2>FAQ</h2>
-      <p>Les réponses aux questions les plus fréquentes.</p>
-    </div>
-
-    <div class="faq">
-      <div class="card faq-item">
-        <div class="faq-q">Comment prendre rendez-vous ?</div>
-        <div class="faq-a">
-          Cliquez sur <b>Prendre Rendez-Vous</b>, recherchez un médecin à Dakar, choisissez un créneau et confirmez.
-        </div>
-      </div>
-
-      <div class="card faq-item">
-        <div class="faq-q">Dans quelles villes c’est disponible ?</div>
-        <div class="faq-a">
-          Pour le moment, AlloDocteur est disponible à <b>Dakar</b>. Les autres villes arriveront progressivement.
-        </div>
-      </div>
-
-      <div class="card faq-item">
-        <div class="faq-q">Quels moyens de paiement sont acceptés ?</div>
-        <div class="faq-a">
-          Mobile Money peut être disponible selon les options activées sur la plateforme.
-        </div>
-      </div>
-
-      <div class="card faq-item">
-        <div class="faq-q">Mes informations sont-elles protégées ?</div>
-        <div class="faq-a">
-          Oui. La confidentialité et la protection des données sont une priorité.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SÉCURITÉ & CONFIDENTIALITÉ -->
-  <section class="section card privacy">
-    <div>
-      <h2>Sécurité & Confidentialité</h2>
-      <p>
-        Vos informations sont traitées avec sérieux. AlloDocteur met la confidentialité au centre
-        et sécurise l’accès aux informations nécessaires à la prise de rendez-vous.
-      </p>
-    </div>
-    <div class="privacy-badges">
-      <span class="badge">🔒 Données protégées</span>
-      <span class="badge">✅ Accès contrôlé</span>
-      <span class="badge">📄 Confidentialité</span>
-    </div>
-  </section>
-
-  <!-- CTA FINAL -->
-  <section class="final card">
-    <div>
-      <h2>Prêt à prendre rendez-vous ?</h2>
-      <p>Réservez maintenant à Dakar et gagnez du temps.</p>
-    </div>
-    <a mat-flat-button color="primary" routerLink="/search" class="cta">
-      Rechercher un médecin
-    </a>
-  </section>
-</div>
