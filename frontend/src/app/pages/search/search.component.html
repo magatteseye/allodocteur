@@ -1,53 +1,120 @@
-<div class="container">
-    <div class="hello">Bonjour <span>{{ name() }}</span></div>
-    Bonjour <b>{{ fullName }}</b>
+<div class="search-page">
+  <!-- HERO -->
+  <section class="hero-card">
+    <div class="hero-copy">
+      <span class="eyebrow">Recherche médicale</span>
+      <h1>Bonjour <span>{{ name() }}</span></h1>
+      <p class="hero-text">
+        Trouvez rapidement un médecin à Dakar selon la spécialité et la disponibilité.
+      </p>
+    </div>
 
-  
-    <!-- ✅ formGroup doit être sur le form -->
-    <form class="searchCard card" [formGroup]="form" (ngSubmit)="submit()">
-      <mat-form-field appearance="outline" class="f">
+    <div class="hero-user">
+      <div class="user-chip">
+        <span class="dot"></span>
+        <span>{{ fullName }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH FORM -->
+  <section class="search-panel">
+    <div class="panel-head">
+      <div>
+        <h2>Rechercher un médecin</h2>
+        <p>Choisissez une spécialité et lancez votre recherche.</p>
+      </div>
+    </div>
+
+    <form class="search-form" [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="field">
         <mat-icon matPrefix>search</mat-icon>
-        <input matInput placeholder="Choisir une spécialité" formControlName="specialty" />
+        <input
+          matInput
+          placeholder="Choisir une spécialité"
+          formControlName="specialty"
+        />
       </mat-form-field>
-  
-      <mat-form-field appearance="outline" class="f">
+
+      <mat-form-field appearance="outline" class="field">
         <mat-icon matPrefix>location_on</mat-icon>
-        <input matInput placeholder="Dakar" formControlName="city" />
+        <input
+          matInput
+          placeholder="Dakar"
+          formControlName="city"
+        />
       </mat-form-field>
-  
-      <button mat-flat-button color="primary" class="btn" type="submit">Rechercher</button>
+
+      <button mat-flat-button color="primary" class="search-btn" type="submit">
+        Rechercher
+      </button>
     </form>
-  
-    <div class="sectionTitle">Spécialiste Populaire</div>
+  </section>
+
+  <!-- SPECIALTIES -->
+  <section class="section-block">
+    <div class="section-head">
+      <h3>Spécialités populaires</h3>
+      <p>Sélection rapide pour gagner du temps.</p>
+    </div>
+
     <mat-chip-listbox class="chips">
-      <mat-chip-option class="chip" *ngFor="let s of specialties" (click)="setSpecialty(s)">
+      <mat-chip-option
+        class="chip"
+        *ngFor="let s of specialties"
+        (click)="setSpecialty(s)"
+      >
         {{ s }}
       </mat-chip-option>
     </mat-chip-listbox>
-  
-    <div class="sectionTitle">Service généraliste</div>
-  
-    <div class="list" *ngIf="!loading(); else loadingTpl">
-      <div class="docCard card" *ngFor="let d of doctors()">
-        <div class="docLeft">
-          <div class="avatar"></div>
-          <div>
-            <div class="docName">{{ d.fullName }}</div>
-            <div class="docMeta">{{ d.specialty }}</div>
-            <div class="docSub">{{ d.clinic }}, {{ d.city }}</div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section-block">
+    <div class="section-head">
+      <h3>Médecins disponibles</h3>
+      <p>Consultez la liste et ouvrez les disponibilités du praticien.</p>
+    </div>
+
+    <div class="doctor-list" *ngIf="!loading(); else loadingTpl">
+      <article class="doctor-card" *ngFor="let d of doctors()">
+        <div class="doctor-main">
+          <div class="doctor-avatar">
+            <mat-icon>person</mat-icon>
+          </div>
+
+          <div class="doctor-info">
+            <div class="doctor-top">
+              <h4>{{ d.fullName }}</h4>
+              <span class="specialty-badge">{{ d.specialty }}</span>
+            </div>
+
+            <p class="doctor-clinic">{{ d.clinic }}</p>
+            <p class="doctor-city">
+              <mat-icon>location_on</mat-icon>
+              <span>{{ d.city }}</span>
+            </p>
           </div>
         </div>
-  
-        <a class="docBtn" [routerLink]="['/doctor', d.id]">Voir disponibilités</a>
-      </div>
-  
-      <div class="empty card" *ngIf="doctors().length === 0">
-        Aucun résultat.
+
+        <a class="doctor-btn" [routerLink]="['/doctor', d.id]">
+          Voir disponibilités
+        </a>
+      </article>
+
+      <div class="empty-state" *ngIf="doctors().length === 0">
+        <div class="empty-icon">
+          <mat-icon>search_off</mat-icon>
+        </div>
+        <h4>Aucun résultat</h4>
+        <p>Essayez une autre spécialité ou vérifiez la ville recherchée.</p>
       </div>
     </div>
-  
-    <ng-template #loadingTpl>
-      <div class="empty card">Chargement…</div>
-    </ng-template>
-  </div>
-  
+  </section>
+
+  <ng-template #loadingTpl>
+    <div class="loading-state">
+      Chargement…
+    </div>
+  </ng-template>
+</div>

@@ -1,60 +1,191 @@
-<div class="container">
-    <div class="head">
-      <div>
-        <div class="kicker">Mon espace</div>
-        <h1>Mes rendez-vous</h1>
+<div class="appointments-page">
+  <!-- Header -->
+  <header class="page-header">
+    <div>
+      <span class="eyebrow">Mon espace</span>
+      <h1>Mes rendez-vous</h1>
+      <p class="page-subtitle">
+        Consultez vos rendez-vous à venir, votre historique et gérez vos réservations.
+      </p>
+    </div>
+
+    <div class="header-actions">
+      <button class="ui-btn ghost-btn" type="button" (click)="load()">
+        Actualiser
+      </button>
+    </div>
+  </header>
+
+  <!-- Summary -->
+  <section class="summary-grid" *ngIf="!loading() && !error()">
+    <article class="summary-card">
+      <span class="summary-label">À venir</span>
+      <strong>{{ upcoming().length }}</strong>
+      <p>Rendez-vous planifiés</p>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-label">Historique</span>
+      <strong>{{ history().length }}</strong>
+      <p>Consultations passées</p>
+    </article>
+
+    <article class="summary-card accent">
+      <span class="summary-label">Action rapide</span>
+      <strong>Réserver</strong>
+      <button class="mini-link" type="button" (click)="goSearch()">
+        Chercher un médecin
+      </button>
+    </article>
+  </section>
+
+  <!-- Loading -->
+  <section class="state-card loading-state" *ngIf="loading()">
+    <div class="state-icon">⏳</div>
+    <h3>Chargement...</h3>
+    <p>Nous récupérons vos rendez-vous.</p>
+  </section>
+
+  <!-- Error -->
+  <section class="state-card error-state" *ngIf="error() && !loading()">
+    <div class="state-icon">⚠️</div>
+    <h3>Impossible de charger vos rendez-vous</h3>
+    <p>{{ error() }}</p>
+    <button class="ui-btn primary-btn" type="button" (click)="goSearch()">
+      Chercher un médecin
+    </button>
+  </section>
+
+  <ng-container *ngIf="!loading() && !error()">
+    <!-- Upcoming -->
+    <section class="appointments-section">
+      <div class="section-head">
+        <div>
+          <span class="section-tag">À venir</span>
+          <h2>Prochains rendez-vous</h2>
+        </div>
       </div>
-      <button class="mini" type="button" (click)="load()">Actualiser</button>
-    </div>
-  
-    <div class="card box" *ngIf="loading()">
-      <div class="muted">Chargement...</div>
-    </div>
-  
-    <div class="card box" *ngIf="error() && !loading()">
-      <div class="err">{{ error() }}</div>
-      <button class="cta" type="button" (click)="goSearch()">Chercher un médecin</button>
-    </div>
-  
-    <ng-container *ngIf="!loading() && !error()">
-      <div class="sectionTitle">À venir</div>
-      <div class="card appt" *ngFor="let a of upcoming()">
-        <div class="top">
-          <div>
-            <div class="doc">{{ a.doctor?.fullName }}</div>
-            <div class="meta">{{ a.doctor?.specialty }} · {{ a.doctor?.clinic }} · {{ a.doctor?.city }}</div>
+
+      <div class="appointments-list" *ngIf="upcoming().length > 0; else emptyUpcoming">
+        <article class="appointment-card upcoming-card" *ngFor="let a of upcoming()">
+          <div class="appointment-top">
+            <div class="doctor-block">
+              <div class="doctor-avatar">Dr</div>
+
+              <div class="doctor-info">
+                <h3>{{ a.doctor?.fullName }}</h3>
+                <p class="doctor-meta">
+                  {{ a.doctor?.specialty }} · {{ a.doctor?.clinic }} · {{ a.doctor?.city }}
+                </p>
+              </div>
+            </div>
+
+            <span class="status-badge" [ngClass]="badgeClass(a.status)">
+              {{ a.status }}
+            </span>
           </div>
-          <span class="badge" [ngClass]="badgeClass(a.status)">{{ a.status }}</span>
-        </div>
-  
-        <div class="date">{{ a.dateTime | date:'fullDate':'':'fr-FR' }} · {{ a.dateTime | date:'shortTime' }}</div>
-        <div class="meta">Paiement : {{ a.paymentStatus || 'PENDING' }}</div>
-  
-        <div class="actions">
-          <button class="mini" type="button" *ngIf="canCancel(a)" (click)="cancel(a.id)">Annuler</button>
-        </div>
-      </div>
-  
-      <div class="empty card box" *ngIf="upcoming().length === 0">
-        Aucun rendez-vous à venir.
-      </div>
-  
-      <div class="sectionTitle" style="margin-top:16px;">Historique</div>
-      <div class="card appt" *ngFor="let a of history()">
-        <div class="top">
-          <div>
-            <div class="doc">{{ a.doctor?.fullName }}</div>
-            <div class="meta">{{ a.doctor?.specialty }} · {{ a.doctor?.clinic }} · {{ a.doctor?.city }}</div>
+
+          <div class="appointment-details">
+            <div class="detail-item">
+              <span class="detail-label">Date</span>
+              <span class="detail-value">
+                {{ a.dateTime | date:'fullDate':'':'fr-FR' }}
+              </span>
+            </div>
+
+            <div class="detail-item">
+              <span class="detail-label">Heure</span>
+              <span class="detail-value">
+                {{ a.dateTime | date:'shortTime' }}
+              </span>
+            </div>
+
+            <div class="detail-item">
+              <span class="detail-label">Paiement</span>
+              <span class="detail-value">
+                {{ a.paymentStatus || 'PENDING' }}
+              </span>
+            </div>
           </div>
-          <span class="badge" [ngClass]="badgeClass(a.status)">{{ a.status }}</span>
+
+          <div class="appointment-actions">
+            <button
+              class="ui-btn danger-btn"
+              type="button"
+              *ngIf="canCancel(a)"
+              (click)="cancel(a.id)"
+            >
+              Annuler
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <ng-template #emptyUpcoming>
+        <div class="empty-card">
+          <div class="empty-icon">📅</div>
+          <h3>Aucun rendez-vous à venir</h3>
+          <p>Vous n’avez pas encore de rendez-vous planifié.</p>
+          <button class="ui-btn primary-btn" type="button" (click)="goSearch()">
+            Prendre rendez-vous
+          </button>
         </div>
-  
-        <div class="date">{{ a.dateTime | date:'medium':'':'fr-FR' }}</div>
-        <div class="meta">Paiement : {{ a.paymentStatus || 'PENDING' }}</div>
+      </ng-template>
+    </section>
+
+    <!-- History -->
+    <section class="appointments-section history-section">
+      <div class="section-head">
+        <div>
+          <span class="section-tag soft-tag">Historique</span>
+          <h2>Consultations passées</h2>
+        </div>
       </div>
-  
-      <div class="empty card box" *ngIf="history().length === 0">
-        Pas encore d’historique.
+
+      <div class="appointments-list" *ngIf="history().length > 0; else emptyHistory">
+        <article class="appointment-card history-card" *ngFor="let a of history()">
+          <div class="appointment-top">
+            <div class="doctor-block">
+              <div class="doctor-avatar muted-avatar">Dr</div>
+
+              <div class="doctor-info">
+                <h3>{{ a.doctor?.fullName }}</h3>
+                <p class="doctor-meta">
+                  {{ a.doctor?.specialty }} · {{ a.doctor?.clinic }} · {{ a.doctor?.city }}
+                </p>
+              </div>
+            </div>
+
+            <span class="status-badge" [ngClass]="badgeClass(a.status)">
+              {{ a.status }}
+            </span>
+          </div>
+
+          <div class="appointment-details">
+            <div class="detail-item">
+              <span class="detail-label">Date</span>
+              <span class="detail-value">
+                {{ a.dateTime | date:'medium':'':'fr-FR' }}
+              </span>
+            </div>
+
+            <div class="detail-item">
+              <span class="detail-label">Paiement</span>
+              <span class="detail-value">
+                {{ a.paymentStatus || 'PENDING' }}
+              </span>
+            </div>
+          </div>
+        </article>
       </div>
-    </ng-container>
-  </div>
+
+      <ng-template #emptyHistory>
+        <div class="empty-card soft-empty">
+          <div class="empty-icon">🗂️</div>
+          <h3>Pas encore d’historique</h3>
+          <p>Vos anciens rendez-vous apparaîtront ici.</p>
+        </div>
+      </ng-template>
+    </section>
+  </ng-container>
+</div>

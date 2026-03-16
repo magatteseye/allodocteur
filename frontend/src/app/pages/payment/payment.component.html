@@ -1,19 +1,86 @@
-<div class="container">
-  <div class="card" style="padding:16px; max-width:700px; margin:0 auto;">
-    <h2 style="margin:0 0 10px;">Confirmation du rendez-vous</h2>
+<div class="confirmation-page">
+  <section class="confirmation-card">
+    <div *ngIf="loading()" class="state-card">
+      <div class="state-icon">⏳</div>
+      <h2>Chargement...</h2>
+      <p>Nous récupérons les informations de votre rendez-vous.</p>
+    </div>
 
-    <div *ngIf="loading()">Chargement...</div>
-    <div *ngIf="error()" style="color:#b91c1c; font-weight:700;">{{ error() }}</div>
+    <div *ngIf="error()" class="state-card error-card">
+      <div class="state-icon">⚠️</div>
+      <h2>Une erreur est survenue</h2>
+      <p>{{ error() }}</p>
+
+      <div class="action-row">
+        <a routerLink="/rendezvous" class="ui-btn secondary-btn">
+          Voir mes rendez-vous
+        </a>
+      </div>
+    </div>
 
     <ng-container *ngIf="!loading() && data() as d">
-      <p><b>Paiement :</b> {{ d.paymentStatus || d.paymentStatus }}</p>
-      <p><b>Rendez-vous :</b> {{ d.appointmentStatus || d.status }}</p>
+      <div class="success-head">
+        <div class="success-badge">Confirmation</div>
+        <div class="success-icon">✓</div>
+        <h1>Votre rendez-vous est bien enregistré</h1>
+        <p class="success-text">
+          Retrouvez ci-dessous le récapitulatif de votre réservation.
+        </p>
+      </div>
 
-      <p *ngIf="d.doctor?.fullName"><b>Médecin :</b> {{ d.doctor.fullName }}</p>
-      <p *ngIf="d.dateTime"><b>Date :</b> {{ d.dateTime | date:'fullDate':'':'fr-FR' }} - {{ d.dateTime | date:'shortTime' }}</p>
-      <p *ngIf="d.amountCfa"><b>Montant :</b> {{ d.amountCfa | number }} CFA</p>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <span class="label">Paiement</span>
+          <span class="value status-pill neutral">
+            {{ d.paymentStatus || 'PENDING' }}
+          </span>
+        </div>
 
-      <a routerLink="/rendezvous">Voir mes rendez-vous</a>
+        <div class="summary-item">
+          <span class="label">Rendez-vous</span>
+          <span class="value status-pill success">
+            {{ d.appointmentStatus || d.status }}
+          </span>
+        </div>
+
+        <div class="summary-item" *ngIf="d.doctor?.fullName">
+          <span class="label">Médecin</span>
+          <span class="value">{{ d.doctor.fullName }}</span>
+        </div>
+
+        <div class="summary-item" *ngIf="d.dateTime">
+          <span class="label">Date</span>
+          <span class="value">
+            {{ d.dateTime | date:'fullDate':'':'fr-FR' }}
+          </span>
+        </div>
+
+        <div class="summary-item" *ngIf="d.dateTime">
+          <span class="label">Heure</span>
+          <span class="value">
+            {{ d.dateTime | date:'shortTime' }}
+          </span>
+        </div>
+
+        <div class="summary-item" *ngIf="d.amountCfa">
+          <span class="label">Montant</span>
+          <span class="value">{{ d.amountCfa | number }} CFA</span>
+        </div>
+      </div>
+
+      <div class="info-note">
+        Conservez ces informations. Vous pourrez retrouver ce rendez-vous dans votre espace personnel.
+      </div>
+
+      <div class="action-row">
+        <a routerLink="/rendezvous" class="ui-btn primary-btn">
+          Voir mes rendez-vous
+        </a>
+
+        <a routerLink="/search" class="ui-btn secondary-btn">
+          Rechercher un autre médecin
+        </a>
+      </div>
     </ng-container>
-  </div>
+  </section>
 </div>
