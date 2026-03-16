@@ -1,265 +1,322 @@
-<div class="container">
-    <header class="top">
-      <div>
-        <h1>Mon compte</h1>
-        <p class="muted">Gérez votre profil patient, préférences et sécurité.</p>
-      </div>
-  
-      <div class="top-actions">
-        <a mat-stroked-button routerLink="/search" class="btn">Retour</a>
-      </div>
-    </header>
-  
-    <!-- Toast -->
-    <div class="toast" *ngIf="toast()">{{ toast() }}</div>
-  
-    <!-- Loading -->
-    <div class="card loading" *ngIf="loading()">
-      Chargement…
+<div class="account-page">
+  <!-- Header -->
+  <header class="page-header">
+    <div>
+      <span class="eyebrow">Espace patient</span>
+      <h1>Mon compte</h1>
+      <p class="page-subtitle">
+        Gérez vos informations, préférences et la sécurité de votre compte.
+      </p>
     </div>
-  
-    <div class="layout" *ngIf="!loading()">
-      <!-- Sidebar / Summary -->
-      <aside class="card side">
-        <div class="avatar">{{ initials }}</div>
-        <div class="who">
-          <div class="name">{{ profile().fullName }}</div>
-          <div class="email">{{ profile().email }}</div>
-        </div>
-  
-        <div class="pill-row">
-          <span class="pill">📍 Dakar</span>
-          <span class="pill">✅ Patient</span>
-        </div>
-  
-        <div class="info">
-          <div class="row">
-            <div class="k">Téléphone</div>
-            <div class="v">{{ profile().phone }}</div>
-          </div>
-          <div class="row">
-            <div class="k">Adresse</div>
-            <div class="v">{{ profile().address || '—' }}</div>
-          </div>
-        </div>
-  
-        <div class="note">
-          AlloDocteur est disponible à <b>Dakar</b> pour le moment.
-        </div>
-  
-        <div class="side-actions">
-          <a mat-flat-button color="primary" routerLink="/search" class="btn primary">Prendre RDV</a>
-          <a mat-stroked-button routerLink="/contact" class="btn">Support</a>
-        </div>
-      </aside>
-  
-      <!-- Main -->
-      <main class="main">
-        <!-- Infos personnelles -->
-        <section class="card section">
-          <div class="section-head">
-            <div>
-              <div class="h">Informations personnelles</div>
-              <div class="s">Nom, téléphone et informations de base.</div>
-            </div>
-  
-            <div class="section-actions">
-              <button mat-stroked-button class="btn" type="button" (click)="loadProfile()" [disabled]="saving()">
-                Annuler
-              </button>
-              <button mat-flat-button color="primary" class="btn primary" type="button"
-                (click)="saveInfo()" [disabled]="!canSaveInfo()">
-                <span *ngIf="!saving()">Enregistrer</span>
-                <span *ngIf="saving()">Enregistrement…</span>
-              </button>
-            </div>
-          </div>
-  
-          <div class="grid2">
-            <div class="field">
-              <label>Nom complet</label>
-              <input class="inp" type="text" formControlName="fullName" [formGroup]="infoForm" placeholder="Ex: Awa Ndiaye"/>
-              <div class="help" *ngIf="infoForm.controls.fullName.touched && infoForm.controls.fullName.invalid">
-                Nom invalide.
-              </div>
-            </div>
-  
-            <div class="field">
-              <label>Téléphone</label>
-              <input class="inp" type="text" formControlName="phone" [formGroup]="infoForm" placeholder="+221 77 123 45 67"/>
-              <div class="help" *ngIf="infoForm.controls.phone.touched && infoForm.controls.phone.invalid">
-                Téléphone invalide.
-              </div>
-            </div>
-  
-            <div class="field">
-              <label>Ville</label>
-              <input class="inp" type="text" [value]="'Dakar'" disabled />
-              <div class="hint">Disponible à Dakar pour le moment.</div>
-            </div>
-  
-            <div class="field">
-              <label>Adresse (optionnel)</label>
-              <input class="inp" type="text" formControlName="address" [formGroup]="infoForm" placeholder="Quartier, rue…"/>
-            </div>
-  
-            <div class="field">
-              <label>Année de naissance (optionnel)</label>
-              <input class="inp" type="number" formControlName="birthYear" [formGroup]="infoForm" placeholder="Ex: 1998"/>
-            </div>
-  
-            <div class="field">
-              <label>Sexe (optionnel)</label>
-              <select class="inp" formControlName="sex" [formGroup]="infoForm">
-                <option value="—">—</option>
-                <option value="F">F</option>
-                <option value="M">M</option>
-              </select>
-            </div>
-          </div>
-        </section>
-  
-        <!-- Contact d’urgence -->
-        <section class="card section">
-          <div class="section-head">
-            <div>
-              <div class="h">Contact d’urgence</div>
-              <div class="s">En cas de besoin, utile pour les rendez-vous.</div>
-            </div>
-  
-            <div class="section-actions">
-              <button mat-flat-button color="primary" class="btn primary" type="button"
-                (click)="saveEmergency()" [disabled]="!canSaveEmergency()">
-                Enregistrer
-              </button>
-            </div>
-          </div>
-  
-          <div class="grid2" [formGroup]="emergencyForm">
-            <div class="field">
-              <label>Nom</label>
-              <input class="inp" type="text" formControlName="emergencyName" placeholder="Nom du contact"/>
-            </div>
-            <div class="field">
-              <label>Téléphone</label>
-              <input class="inp" type="text" formControlName="emergencyPhone" placeholder="+221 …"/>
-            </div>
-          </div>
-        </section>
-  
-        <!-- Préférences -->
-        <section class="card section">
-          <div class="section-head">
-            <div>
-              <div class="h">Préférences</div>
-              <div class="s">Langue et notifications.</div>
-            </div>
-  
-            <div class="section-actions">
-              <button mat-flat-button color="primary" class="btn primary" type="button"
-                (click)="savePrefs()" [disabled]="!canSavePrefs()">
-                Enregistrer
-              </button>
-            </div>
-          </div>
-  
-          <div class="grid2" [formGroup]="prefsForm">
-            <div class="field">
-              <label>Langue</label>
-              <select class="inp" formControlName="language">
-                <option value="FR">Français</option>
-                <option value="WO">Wolof</option>
-              </select>
-              <div class="hint">Vous pourrez traduire progressivement l’application.</div>
-            </div>
-  
-            <div class="field">
-              <label>Notifications</label>
-              <div class="switches">
-                <label class="switch">
-                  <input type="checkbox" formControlName="smsReminders" />
-                  <span>Rappels SMS</span>
-                </label>
-                <label class="switch">
-                  <input type="checkbox" formControlName="emailReminders" />
-                  <span>Rappels Email</span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </section>
-  
-        <!-- Sécurité -->
-        <section class="card section">
-          <div class="section-head">
-            <div>
-              <div class="h">Sécurité</div>
-              <div class="s">Modifier votre mot de passe.</div>
-            </div>
-          </div>
-  
-          <div class="alert err" *ngIf="error()">
-            <span>⚠️</span> {{ error() }}
-          </div>
-  
-          <div class="grid2" [formGroup]="pwdForm">
-            <div class="field">
-              <label>Mot de passe actuel</label>
-              <input class="inp" [type]="showPwd() ? 'text' : 'password'" formControlName="currentPassword" />
-            </div>
-  
-            <div class="field">
-              <label>Nouveau mot de passe</label>
-              <input class="inp" [type]="showPwd() ? 'text' : 'password'" formControlName="newPassword" />
-              <div class="hint">Minimum 8 caractères.</div>
-            </div>
-  
-            <div class="field">
-              <label>Confirmer</label>
-              <input class="inp" [type]="showPwd() ? 'text' : 'password'" formControlName="confirmPassword" />
-            </div>
-  
-            <div class="field">
-              <label>&nbsp;</label>
-              <div class="pwd-actions">
-                <button type="button" class="mini" (click)="showPwd.set(!showPwd())">
-                  {{ showPwd() ? 'Masquer' : 'Afficher' }}
-                </button>
-  
-                <button mat-flat-button color="primary" class="btn primary" type="button"
-                  (click)="changePassword()" [disabled]="changingPwd() || pwdForm.invalid">
-                  <span *ngIf="!changingPwd()">Changer le mot de passe</span>
-                  <span *ngIf="changingPwd()">Modification…</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-  
-        <!-- Actions de compte -->
-        <section class="card section danger-zone">
-          <div class="section-head">
-            <div>
-              <div class="h">Zone dangereuse</div>
-              <div class="s">Actions sensibles sur votre compte.</div>
-            </div>
-          </div>
-  
-          <div class="danger-row">
-            <div>
-              <div class="danger-title">Supprimer mon compte</div>
-              <div class="danger-text">Cette action sera irréversible après confirmation.</div>
-            </div>
-            <button mat-stroked-button class="btn danger" type="button" (click)="deleteAccount()">
-              Supprimer
-            </button>
-          </div>
-          <div class="logout">
-            <button mat-stroked-button class="btn danger full" type="button" (click)="logout()">
-              Se déconnecter
-            </button>
-          </div>
-        </section>
-      </main>
+
+    <div class="page-header-actions">
+      <a mat-stroked-button routerLink="/search" class="ui-btn">Retour</a>
     </div>
+  </header>
+
+  <!-- Toast -->
+  <div class="toast" *ngIf="toast()">
+    {{ toast() }}
   </div>
+
+  <!-- Loading -->
+  <section class="loading-card" *ngIf="loading()">
+    Chargement…
+  </section>
+
+  <div class="account-layout" *ngIf="!loading()">
+    <!-- Sidebar -->
+    <aside class="profile-sidebar">
+      <div class="profile-card">
+        <div class="profile-top">
+          <div class="avatar">{{ initials }}</div>
+
+          <div class="profile-meta">
+            <h2>{{ profile().fullName }}</h2>
+            <p>{{ profile().email }}</p>
+          </div>
+        </div>
+
+        <div class="badge-row">
+          <span class="badge">Patient</span>
+          <span class="badge badge-soft">Dakar</span>
+        </div>
+
+        <div class="profile-info">
+          <div class="info-item">
+            <span class="label">Téléphone</span>
+            <span class="value">{{ profile().phone || '—' }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Adresse</span>
+            <span class="value">{{ profile().address || '—' }}</span>
+          </div>
+        </div>
+
+        <div class="profile-note">
+          AlloDocteur est actuellement disponible à Dakar.
+        </div>
+
+        <div class="profile-actions">
+          <a mat-flat-button color="primary" routerLink="/search" class="ui-btn primary-btn">
+            Prendre RDV
+          </a>
+          <a mat-stroked-button routerLink="/contact" class="ui-btn">
+            Support
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="account-main">
+      <!-- Informations personnelles -->
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h3>Informations personnelles</h3>
+            <p>Vos informations de base et vos coordonnées.</p>
+          </div>
+
+          <div class="panel-actions">
+            <button
+              mat-stroked-button
+              class="ui-btn"
+              type="button"
+              (click)="loadProfile()"
+              [disabled]="saving()"
+            >
+              Annuler
+            </button>
+
+            <button
+              mat-flat-button
+              color="primary"
+              class="ui-btn primary-btn"
+              type="button"
+              (click)="saveInfo()"
+              [disabled]="!canSaveInfo()"
+            >
+              <span *ngIf="!saving()">Enregistrer</span>
+              <span *ngIf="saving()">Enregistrement…</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-grid" [formGroup]="infoForm">
+          <div class="field">
+            <label>Nom complet</label>
+            <input class="input" type="text" formControlName="fullName" placeholder="Ex: Awa Ndiaye" />
+            <div class="help" *ngIf="infoForm.controls.fullName.touched && infoForm.controls.fullName.invalid">
+              Nom invalide.
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Téléphone</label>
+            <input class="input" type="text" formControlName="phone" placeholder="+221 77 123 45 67" />
+            <div class="help" *ngIf="infoForm.controls.phone.touched && infoForm.controls.phone.invalid">
+              Téléphone invalide.
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Ville</label>
+            <input class="input" type="text" [value]="'Dakar'" disabled />
+            <div class="hint">Service disponible à Dakar pour le moment.</div>
+          </div>
+
+          <div class="field">
+            <label>Adresse</label>
+            <input class="input" type="text" formControlName="address" placeholder="Quartier, rue…" />
+          </div>
+
+          <div class="field">
+            <label>Année de naissance</label>
+            <input class="input" type="number" formControlName="birthYear" placeholder="Ex: 1998" />
+          </div>
+
+          <div class="field">
+            <label>Sexe</label>
+            <select class="input" formControlName="sex">
+              <option value="—">—</option>
+              <option value="F">F</option>
+              <option value="M">M</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact d'urgence -->
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h3>Contact d’urgence</h3>
+            <p>Une personne à joindre si nécessaire.</p>
+          </div>
+
+          <div class="panel-actions">
+            <button
+              mat-flat-button
+              color="primary"
+              class="ui-btn primary-btn"
+              type="button"
+              (click)="saveEmergency()"
+              [disabled]="!canSaveEmergency()"
+            >
+              Enregistrer
+            </button>
+          </div>
+        </div>
+
+        <div class="form-grid" [formGroup]="emergencyForm">
+          <div class="field">
+            <label>Nom</label>
+            <input class="input" type="text" formControlName="emergencyName" placeholder="Nom du contact" />
+          </div>
+
+          <div class="field">
+            <label>Téléphone</label>
+            <input class="input" type="text" formControlName="emergencyPhone" placeholder="+221 …" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Préférences -->
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h3>Préférences</h3>
+            <p>Langue et rappels de rendez-vous.</p>
+          </div>
+
+          <div class="panel-actions">
+            <button
+              mat-flat-button
+              color="primary"
+              class="ui-btn primary-btn"
+              type="button"
+              (click)="savePrefs()"
+              [disabled]="!canSavePrefs()"
+            >
+              Enregistrer
+            </button>
+          </div>
+        </div>
+
+        <div class="form-grid" [formGroup]="prefsForm">
+          <div class="field">
+            <label>Langue</label>
+            <select class="input" formControlName="language">
+              <option value="FR">Français</option>
+              <option value="WO">Wolof</option>
+            </select>
+            <div class="hint">D’autres traductions pourront être ajoutées progressivement.</div>
+          </div>
+
+          <div class="field">
+            <label>Notifications</label>
+            <div class="switch-list">
+              <label class="switch-item">
+                <input type="checkbox" formControlName="smsReminders" />
+                <span>Rappels SMS</span>
+              </label>
+
+              <label class="switch-item">
+                <input type="checkbox" formControlName="emailReminders" />
+                <span>Rappels Email</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sécurité -->
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h3>Sécurité</h3>
+            <p>Modifiez votre mot de passe en toute sécurité.</p>
+          </div>
+        </div>
+
+        <div class="alert error" *ngIf="error()">
+          {{ error() }}
+        </div>
+
+        <div class="form-grid" [formGroup]="pwdForm">
+          <div class="field">
+            <label>Mot de passe actuel</label>
+            <input class="input" [type]="showPwd() ? 'text' : 'password'" formControlName="currentPassword" />
+          </div>
+
+          <div class="field">
+            <label>Nouveau mot de passe</label>
+            <input class="input" [type]="showPwd() ? 'text' : 'password'" formControlName="newPassword" />
+            <div class="hint">Minimum 8 caractères.</div>
+          </div>
+
+          <div class="field">
+            <label>Confirmation</label>
+            <input class="input" [type]="showPwd() ? 'text' : 'password'" formControlName="confirmPassword" />
+          </div>
+
+          <div class="field field-actions">
+            <label>Options</label>
+
+            <div class="password-actions">
+              <button type="button" class="ghost-btn" (click)="showPwd.set(!showPwd())">
+                {{ showPwd() ? 'Masquer' : 'Afficher' }}
+              </button>
+
+              <button
+                mat-flat-button
+                color="primary"
+                class="ui-btn primary-btn"
+                type="button"
+                (click)="changePassword()"
+                [disabled]="changingPwd() || pwdForm.invalid"
+              >
+                <span *ngIf="!changingPwd()">Changer le mot de passe</span>
+                <span *ngIf="changingPwd()">Modification…</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Zone dangereuse -->
+      <section class="panel danger-panel">
+        <div class="panel-head">
+          <div>
+            <h3>Zone sensible</h3>
+            <p>Actions importantes liées à votre compte.</p>
+          </div>
+        </div>
+
+        <div class="danger-box">
+          <div>
+            <h4>Supprimer mon compte</h4>
+            <p>Cette action est définitive après confirmation.</p>
+          </div>
+
+          <button mat-stroked-button class="ui-btn danger-btn" type="button" (click)="deleteAccount()">
+            Supprimer
+          </button>
+        </div>
+
+        <div class="danger-box">
+          <div>
+            <h4>Se déconnecter</h4>
+            <p>Fermez votre session sur cet appareil.</p>
+          </div>
+
+          <button mat-stroked-button class="ui-btn danger-btn" type="button" (click)="logout()">
+            Se déconnecter
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

@@ -1,157 +1,202 @@
-<div class="container">
-    <!-- Hero -->
-    <section class="hero card">
-      <div class="left">
-        <div class="kicker">À propos</div>
-        <h1>AlloDocteur</h1>
-  
-        <p class="lead">
-          AlloDocteur est une plateforme qui permet de <b>prendre rendez-vous</b> avec un médecin à
-          <b>Dakar</b> en quelques clics. Notre objectif : rendre la prise de rendez-vous plus
-          <b>simple</b>, plus <b>rapide</b> et plus <b>fiable</b>.
+<div class="about-page">
+  <!-- HERO ÉDITORIAL -->
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">À propos d’AlloDocteur</span>
+      <h1>Rendre l’accès au rendez-vous médical plus simple à Dakar</h1>
+      <p class="hero-text">
+        Nous avons créé AlloDocteur pour réduire les appels inutiles,
+        rendre les disponibilités plus claires et offrir une prise de
+        rendez-vous plus fluide pour les patients comme pour les cabinets.
+      </p>
+
+      <div class="hero-actions">
+        <a mat-flat-button color="primary" routerLink="/search" class="btn-main">
+          Trouver un médecin
+        </a>
+        <a mat-stroked-button routerLink="/contact" class="btn-main btn-alt">
+          Nous contacter
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-media">
+      <img
+        src="assets/about/about-editorial.jpg"
+        alt="Patient utilisant AlloDocteur"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <!-- INTRO STORY -->
+  <section class="section story">
+    <div class="story-left">
+      <span class="section-tag">Pourquoi nous existons</span>
+      <h2>Prendre rendez-vous ne devrait pas être compliqué</h2>
+    </div>
+
+    <div class="story-right">
+      <p>
+        Entre les appels répétés, le manque de visibilité sur les créneaux
+        et les déplacements inutiles, réserver une consultation peut vite
+        devenir frustrant.
+      </p>
+      <p>
+        AlloDocteur a été pensé pour apporter plus de clarté, plus de rapidité
+        et une meilleure expérience, avec un parcours simple, lisible et adapté
+        au mobile.
+      </p>
+    </div>
+  </section>
+
+  <!-- AVANT / APRÈS -->
+  <section class="section contrast-block">
+    <div class="section-head center">
+      <span class="section-tag">Avant / Après</span>
+      <h2>Une expérience plus claire à chaque étape</h2>
+    </div>
+
+    <div class="before-after">
+      <article class="compare-card before">
+        <div class="compare-badge">Avant</div>
+        <h3>Un parcours souvent frustrant</h3>
+        <ul>
+          <li>Appels à répétition</li>
+          <li>Peu de visibilité sur les disponibilités</li>
+          <li>Temps perdu pour trouver un créneau</li>
+          <li>Risque d’oubli du rendez-vous</li>
+        </ul>
+      </article>
+
+      <article class="compare-card after">
+        <div class="compare-badge">Avec AlloDocteur</div>
+        <h3>Une prise de rendez-vous plus fluide</h3>
+        <ul>
+          <li>Recherche simple par spécialité</li>
+          <li>Créneaux plus lisibles</li>
+          <li>Réservation rapide</li>
+          <li>Confirmation et rappels</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- IMAGE FULL WIDTH -->
+  <section class="section visual-band">
+    <div class="visual-card">
+      <img
+        src="assets/about/about-wide.jpg"
+        alt="Expérience numérique médicale AlloDocteur"
+        loading="lazy"
+      />
+      <div class="visual-overlay">
+        <span class="section-tag light">Notre vision</span>
+        <h2>Créer une expérience médicale plus simple, plus humaine et plus moderne</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- POUR QUI -->
+  <section class="section">
+    <div class="section-head center">
+      <span class="section-tag">Pour qui</span>
+      <h2>Une plateforme utile des deux côtés</h2>
+    </div>
+
+    <div class="audience-grid">
+      <article class="audience-card">
+        <img src="assets/about/patients.svg" alt="Patients" loading="lazy" />
+        <h3>Pour les patients</h3>
+        <p>
+          Trouver un médecin, voir les disponibilités et réserver plus facilement,
+          sans multiplier les appels.
         </p>
-  
-        <div class="pill-row">
-          <span class="pill">✅ Premier au Sénégal (RDV en ligne)</span>
-          <span class="pill">📍 Disponible à Dakar</span>
-          <span class="pill">🔔 Confirmation & rappels</span>
+      </article>
+
+      <article class="audience-card">
+        <img src="assets/about/partners.svg" alt="Cliniques et cabinets" loading="lazy" />
+        <h3>Pour les cliniques et cabinets</h3>
+        <p>
+          Mieux organiser les rendez-vous, limiter les oublis et offrir une
+          expérience plus claire aux patients.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- VALEURS -->
+  <section class="section values-section">
+    <div class="values-layout">
+      <div class="values-copy">
+        <span class="section-tag">Nos valeurs</span>
+        <h2>Ce qui guide notre produit</h2>
+        <p>
+          Nous voulons construire un service utile, rassurant et facile à utiliser,
+          avec une attention particulière portée à la clarté de l’expérience.
+        </p>
+      </div>
+
+      <div class="values-list">
+        <div class="value-item">
+          <h3>Simplicité</h3>
+          <p>Un parcours lisible, sans étapes inutiles.</p>
         </div>
-  
-        <div class="cta-row">
-          <a mat-flat-button color="primary" routerLink="/search" class="cta">Trouver un médecin</a>
-          <a mat-stroked-button routerLink="/contact" class="cta secondary">Nous contacter</a>
+
+        <div class="value-item">
+          <h3>Fiabilité</h3>
+          <p>Des informations claires et des confirmations utiles.</p>
+        </div>
+
+        <div class="value-item">
+          <h3>Accessibilité</h3>
+          <p>Une expérience pensée pour être simple sur mobile.</p>
+        </div>
+
+        <div class="value-item">
+          <h3>Confidentialité</h3>
+          <p>Le respect des données et de la vie privée est essentiel.</p>
         </div>
       </div>
-  
-      <div class="right">
-        <div class="illu">
-          <div class="bubble">
-            <div class="bt">Ce qu’on fait</div>
-            <div class="bd">Rendez-vous médicaux en ligne.</div>
-          </div>
-          <div class="bubble b2">
-            <div class="bt">Pour qui</div>
-            <div class="bd">Patients + cliniques/cabinets à Dakar.</div>
-          </div>
-          <div class="bubble b3">
-            <div class="bt">Notre promesse</div>
-            <div class="bd">Simple, clair, sans perte de temps.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- Problème / Solution -->
-    <section class="section">
-      <div class="section-head">
-        <h2>Le problème qu’on résout</h2>
-        <p>Dans la pratique, prendre un rendez-vous peut être long et frustrant.</p>
-      </div>
-  
-      <div class="grid-3">
-        <div class="card item">
-          <div class="ico">📞</div>
-          <h3>Appels et relances</h3>
-          <p>Appeler plusieurs fois pour trouver une disponibilité.</p>
-        </div>
-  
-        <div class="card item">
-          <div class="ico">⏳</div>
-          <h3>Temps perdu</h3>
-          <p>Se déplacer sans être sûr d’avoir un créneau.</p>
-        </div>
-  
-        <div class="card item">
-          <div class="ico">🗓️</div>
-          <h3>Manque de visibilité</h3>
-          <p>Peu d’informations claires sur les disponibilités.</p>
-        </div>
-      </div>
-    </section>
-  
-    <section class="section soft card">
-      <div class="section-head">
-        <h2>Notre solution</h2>
-        <p>AlloDocteur centralise la réservation de rendez-vous en ligne.</p>
-      </div>
-  
-      <div class="grid-3">
-        <div class="card item">
-          <div class="ico">🔎</div>
-          <h3>Recherche simple</h3>
-          <p>Trouvez un médecin par spécialité, zone, disponibilité.</p>
-        </div>
-  
-        <div class="card item">
-          <div class="ico">✅</div>
-          <h3>Réservation immédiate</h3>
-          <p>Choisissez un créneau et confirmez en quelques secondes.</p>
-        </div>
-  
-        <div class="card item">
-          <div class="ico">🔔</div>
-          <h3>Rappels</h3>
-          <p>Recevez une confirmation et un rappel avant le rendez-vous.</p>
-        </div>
-      </div>
-  
-      <div class="note">
-        ⚠️ Pour le moment, AlloDocteur est disponible uniquement à <b>Dakar</b>. Extension progressive ensuite.
-      </div>
-    </section>
-  
-    <!-- Valeurs -->
-    <section class="section">
-      <div class="section-head">
-        <h2>Nos valeurs</h2>
-        <p>Ce qui guide notre produit et notre service.</p>
-      </div>
-  
-      <div class="grid-2">
-        <div class="card value">
-          <div class="v-title">Simplicité</div>
-          <div class="v-text">Moins d’étapes, une expérience fluide sur mobile.</div>
-        </div>
-  
-        <div class="card value">
-          <div class="v-title">Fiabilité</div>
-          <div class="v-text">Infos claires, confirmations et rappels.</div>
-        </div>
-  
-        <div class="card value">
-          <div class="v-title">Accessibilité</div>
-          <div class="v-text">Rendre la réservation simple pour tous.</div>
-        </div>
-  
-        <div class="card value">
-          <div class="v-title">Confidentialité</div>
-          <div class="v-text">Respect des données personnelles et accès contrôlé.</div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- Pour les partenaires -->
-    <section class="section">
-      <div class="card launch">
-        <div>
-          <h2>Vous êtes une clinique ou un cabinet à Dakar ?</h2>
-          <p>
-            Rejoignez AlloDocteur pour mieux gérer vos rendez-vous et réduire les oublis grâce aux rappels.
-          </p>
-        </div>
-        <a mat-flat-button color="primary" routerLink="/contact" class="cta">Devenir partenaire</a>
-      </div>
-    </section>
-  
-    <!-- CTA final -->
-    <section class="final card">
+    </div>
+  </section>
+
+  <!-- PARTENAIRE -->
+  <section class="section">
+    <div class="partner-banner">
       <div>
-        <h2>Prêt à réserver ?</h2>
-        <p>Recherchez un médecin à Dakar et choisissez un créneau disponible.</p>
+        <span class="section-tag">Partenaires</span>
+        <h2>Vous êtes une clinique ou un cabinet à Dakar ?</h2>
+        <p>
+          Rejoignez AlloDocteur pour proposer une réservation plus moderne
+          et mieux structurer la gestion des rendez-vous.
+        </p>
       </div>
-  
-      <a mat-flat-button color="primary" routerLink="/search" class="cta">
-        Trouver un médecin
+
+      <a mat-flat-button color="primary" routerLink="/contact" class="btn-main">
+        Devenir partenaire
       </a>
-    </section>
-  </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL DOUBLE -->
+  <section class="final-cta">
+    <div class="final-box">
+      <span class="section-tag light">Et maintenant ?</span>
+      <h2>Explorez la plateforme</h2>
+      <p>
+        Que vous cherchiez un médecin ou que vous souhaitiez rejoindre
+        le réseau, la suite commence ici.
+      </p>
+
+      <div class="final-actions">
+        <a mat-flat-button color="primary" routerLink="/search" class="btn-main white-btn">
+          Chercher un médecin
+        </a>
+        <a mat-stroked-button routerLink="/contact" class="btn-main outline-light">
+          Devenir partenaire
+        </a>
+      </div>
+    </div>
+  </section>
+</div>

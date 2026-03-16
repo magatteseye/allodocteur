@@ -1,22 +1,46 @@
-<nav class="bottomNav">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+<nav class="mobile-bottom-nav">
+  <a
+    class="nav-link"
+    routerLink="/"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <span class="icon-wrap">
       <mat-icon>home</mat-icon>
-      <span>Accueil</span>
-    </a>
-  
-    <a routerLink="/search" routerLinkActive="active">
+    </span>
+    <span class="label">Accueil</span>
+  </a>
+
+  <a
+    class="nav-link"
+    routerLink="/search"
+    routerLinkActive="active"
+  >
+    <span class="icon-wrap">
       <mat-icon>search</mat-icon>
-      <span>Recherche</span>
-    </a>
-  
-    <a routerLink="/rendezvous" routerLinkActive="active">
-        <mat-icon>event</mat-icon>
-        <span>Rendez-vous</span>
-    </a>
-      
-    <a routerLink="/login" routerLinkActive="active">
+    </span>
+    <span class="label">Recherche</span>
+  </a>
+
+  <a
+    class="nav-link"
+    routerLink="/rendezvous"
+    routerLinkActive="active"
+  >
+    <span class="icon-wrap">
+      <mat-icon>event</mat-icon>
+    </span>
+    <span class="label">RDV</span>
+  </a>
+
+  <a
+    class="nav-link"
+    routerLink="/login"
+    routerLinkActive="active"
+  >
+    <span class="icon-wrap">
       <mat-icon>person</mat-icon>
-      <span>Profil</span>
-    </a>
-  </nav>
-  
+    </span>
+    <span class="label">Profil</span>
+  </a>
+</nav>

@@ -1,227 +1,240 @@
-<div class="container">
-  <!-- ✅ HERO (inchangé) -->
-  <section class="hero card">
-    <div class="left">
-      <h1>Prenez rendez-vous<br />avec un médecin<br />facilement</h1>
+<div class="landing">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="eyebrow">Disponible à Dakar</span>
 
-      <!-- ✅ Ajout léger sous le hero (sans casser ton design) -->
-      <p class="hero-sub">
-        <b>Premier au Sénégal</b> pour la prise de rendez-vous médicaux en ligne.
-        <span class="tag">Disponible à Dakar pour le moment</span>
+      <h1>Réservez un médecin en quelques clics</h1>
+
+      <p class="hero-text">
+        Simple, rapide et rassurant. Trouvez un praticien, choisissez un créneau
+        et confirmez votre rendez-vous en ligne.
       </p>
 
-      <a mat-flat-button color="primary" routerLink="/search" class="cta">
-        Prendre Rendez-Vous
-      </a>
+      <div class="hero-actions">
+        <a mat-flat-button color="primary" routerLink="/search" class="hero-btn">
+          Prendre rendez-vous
+        </a>
+        <a mat-stroked-button routerLink="/contact" class="hero-btn secondary">
+          Devenir partenaire
+        </a>
+      </div>
+
+      <div class="hero-badges">
+        <div class="badge-card">
+          <strong>Rapide</strong>
+          <span>Réservation en ligne</span>
+        </div>
+        <div class="badge-card">
+          <strong>Pratique</strong>
+          <span>Créneaux visibles</span>
+        </div>
+        <div class="badge-card">
+          <strong>Sécurisé</strong>
+          <span>Données protégées</span>
+        </div>
+      </div>
     </div>
 
-    <div class="right">
-      <div class="illu"></div>
+    <div class="hero-visual">
+      <div class="hero-image-card">
+        <img
+        src="assets/PhotoAccueil.png"
+          alt="Illustration médecin AlloDocteur"
+          loading="eager"
+        />
+      </div>
+
+      <div class="floating-card floating-1">
+        <span class="dot"></span>
+        <div>
+          <strong>RDV confirmé</strong>
+          <small>Notification instantanée</small>
+        </div>
+      </div>
+
+      <div class="floating-card floating-2">
+        <span class="dot"></span>
+        <div>
+          <strong>Disponible à Dakar</strong>
+          <small>Recherche par spécialité</small>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ✅ Social proof / Logos (simple, clean) -->
+  <!-- TRUST -->
+  <section class="trust-strip">
+    <p>Une plateforme pensée pour simplifier la prise de rendez-vous médical au Sénégal.</p>
+  </section>
+
+  <!-- BENEFITS -->
   <section class="section">
-    <div class="section-head">
-      <h2>Déjà adopté à Dakar</h2>
-      <p>Cliniques et cabinets qui rejoignent AlloDocteur (exemples).</p>
+    <div class="section-head center">
+      <span class="section-tag">Pourquoi choisir AlloDocteur</span>
+      <h2>Tout l’essentiel, sans complexité</h2>
     </div>
 
-    <div class="logos">
-      <div class="logo-card">Clinique A</div>
-      <div class="logo-card">Cabinet B</div>
-      <div class="logo-card">Centre C</div>
-      <div class="logo-card">Clinique D</div>
-      <div class="logo-card">Cabinet E</div>
-    </div>
-  </section>
+    <div class="benefits-grid">
+      <article class="info-card">
+        <div class="icon-wrap">📅</div>
+        <h3>Réservation rapide</h3>
+        <p>Choisissez un médecin et un créneau disponible sans appel téléphonique.</p>
+      </article>
 
-  <!-- ✅ Features (cards) -->
-  <section class="section soft card">
-    <div class="section-head">
-      <h2>Tout pour réserver sans stress</h2>
-      <p>Une expérience claire sur mobile, pensée pour Dakar.</p>
-    </div>
+      <article class="info-card">
+        <div class="icon-wrap">🔔</div>
+        <h3>Rappel automatique</h3>
+        <p>Recevez une confirmation et un rappel avant le rendez-vous.</p>
+      </article>
 
-    <div class="grid-3">
-      <div class="card feature">
-        <div class="ico">📅</div>
-        <h3>RDV en ligne</h3>
-        <p>Choisissez un médecin et un créneau disponible en quelques clics.</p>
-      </div>
-
-      <div class="card feature">
-        <div class="ico">🔔</div>
-        <h3>Confirmation & rappels</h3>
-        <p>Recevez une confirmation et un rappel avant votre rendez-vous.</p>
-      </div>
-
-      <div class="card feature">
-        <div class="ico">🔒</div>
+      <article class="info-card">
+        <div class="icon-wrap">🔒</div>
         <h3>Confidentialité</h3>
-        <p>La confidentialité et la protection des données sont une priorité.</p>
-      </div>
+        <p>Vos informations sont traitées avec sérieux et discrétion.</p>
+      </article>
     </div>
   </section>
 
-  <!-- ✅ Comment ça marche (style SaaS) -->
-  <section class="section">
-    <div class="section-head">
-      <h2>Comment ça marche</h2>
-      <p>3 étapes, très simple.</p>
+  <!-- SPECIALTIES -->
+  <section class="section alt-section">
+    <div class="section-head center">
+      <span class="section-tag">Spécialités</span>
+      <h2>Trouvez selon votre besoin</h2>
     </div>
 
-    <div class="steps">
-      <div class="stepx card">
-        <div class="n">1</div>
-        <div>
-          <div class="st-title">Recherchez</div>
-          <div class="st-text">Trouvez un médecin à Dakar par spécialité et disponibilité.</div>
-        </div>
-      </div>
-
-      <div class="stepx card">
-        <div class="n">2</div>
-        <div>
-          <div class="st-title">Réservez</div>
-          <div class="st-text">Choisissez un créneau et confirmez votre rendez-vous.</div>
-        </div>
-      </div>
-
-      <div class="stepx card">
-        <div class="n">3</div>
-        <div>
-          <div class="st-title">Recevez un rappel</div>
-          <div class="st-text">On vous rappelle avant le rendez-vous pour éviter l’oubli.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ✅ Spécialités (chips) -->
-  <section class="section">
-    <div class="section-head">
-      <h2>Spécialités populaires à Dakar</h2>
-      <p>Commencez par une spécialité.</p>
-    </div>
-
-    <div class="chips">
-      <a class="chip" routerLink="/search">Généraliste</a>
-      <a class="chip" routerLink="/search">Dentiste</a>
-      <a class="chip" routerLink="/search">Gynécologue</a>
-      <a class="chip" routerLink="/search">Pédiatre</a>
-      <a class="chip" routerLink="/search">Dermatologue</a>
-      <a class="chip" routerLink="/search">Ophtalmologue</a>
-    </div>
-  </section>
-
-  <!-- ✅ FAQ -->
-<!-- ✅ Témoignages -->
-<!-- ✅ Témoignages -->
-<section class="section">
-  <div class="section-head">
-    <h2>Ils utilisent AlloDocteur</h2>
-    <p>Simple, rassurant, efficace.</p>
-  </div>
-
-  <div class="grid-3">
-    <div class="card testi">
-      <div class="testi-top">
-        <div class="avatar">A</div>
-        <div>
-          <div class="testi-name">Aminata</div>
-          <div class="testi-meta">Dakar</div>
-        </div>
-      </div>
-      <p class="testi-text">
-        J’ai trouvé un rendez-vous rapidement. La confirmation et le rappel m’ont vraiment aidée.
-      </p>
-      <div class="testi-foot">⭐️⭐️⭐️⭐️⭐️</div>
-    </div>
-
-    <div class="card testi">
-      <div class="testi-top">
-        <div class="avatar">M</div>
-        <div>
-          <div class="testi-name">Moussa</div>
-          <div class="testi-meta">Dakar</div>
-        </div>
-      </div>
-      <p class="testi-text">
-        Très pratique. Je peux réserver sans appeler et éviter l’attente au cabinet.
-      </p>
-      <div class="testi-foot">⭐️⭐️⭐️⭐️⭐️</div>
-    </div>
-
-    <div class="card testi">
-      <div class="testi-top">
-        <div class="avatar">F</div>
-        <div>
-          <div class="testi-name">Fatou</div>
-          <div class="testi-meta">Dakar</div>
-        </div>
-      </div>
-      <p class="testi-text">
-        Je vois les disponibilités facilement et je reçois un rappel avant le rendez-vous.
-      </p>
-      <div class="testi-foot">⭐️⭐️⭐️⭐️⭐️</div>
-    </div>
-  </div>
-</section>
-
-<!-- ✅ Questions fréquentes -->
-<section class="section">
-  <div class="section-head">
-    <h2>Questions fréquentes</h2>
-    <p>Les réponses aux questions les plus fréquentes.</p>
-  </div>
-
-  <div class="faq">
-    <div class="card faq-item">
-      <div class="faq-q">Comment prendre rendez-vous ?</div>
-      <div class="faq-a">
-        Cliquez sur <b>Prendre Rendez-Vous</b>, recherchez un médecin à Dakar,
-        choisissez un créneau et confirmez.
-      </div>
-    </div>
-
-    <div class="card faq-item">
-      <div class="faq-q">Dans quelles villes c’est disponible ?</div>
-      <div class="faq-a">
-        Pour le moment, AlloDocteur est disponible à <b>Dakar</b>. Les autres villes arriveront progressivement.
-      </div>
-    </div>
-
-    <div class="card faq-item">
-      <div class="faq-q">Quels moyens de paiement sont acceptés ?</div>
-      <div class="faq-a">
-        Mobile Money peut être disponible selon les options activées sur la plateforme.
-      </div>
-    </div>
-
-    <div class="card faq-item">
-      <div class="faq-q">Mes informations sont-elles protégées ?</div>
-      <div class="faq-a">
-        Oui. La confidentialité et la protection des données sont une priorité.
-      </div>
-    </div>
-  </div>
-</section>
-
-  <!-- ✅ CTA final (fort) -->
-  <section class="finalx card">
-    <div>
-      <h2>Prêt à réserver à Dakar ?</h2>
-      <p>Gagnez du temps dès maintenant avec AlloDocteur.</p>
-    </div>
-
-    <div class="final-actions">
-      <a mat-flat-button color="primary" routerLink="/search" class="cta">
-        Prendre RDV
+    <div class="specialties-grid">
+      <a class="specialty-card" routerLink="/search">
+        <img src="assets/logo_stthoscope.png" alt="Généraliste" loading="lazy" />
+        <span>Généraliste</span>
       </a>
-      <a mat-stroked-button routerLink="/contact" class="cta secondary">
-        Devenir partenaire
+
+      <a class="specialty-card" routerLink="/search">
+        <img src="assets/dentiste.svg" alt="Dentiste" loading="lazy" />
+        <span>Dentiste</span>
+      </a>
+
+      <a class="specialty-card" routerLink="/search">
+        <img src="assets/gynecologue.svg" alt="Gynécologue" loading="lazy" />
+        <span>Gynécologue</span>
+      </a>
+
+      <a class="specialty-card" routerLink="/search">
+        <img src="assets/pediatre.svg" alt="Pédiatre" loading="lazy" />
+        <span>Pédiatre</span>
+      </a>
+
+      <a class="specialty-card" routerLink="/search">
+        <img src="assets/dermatologue.svg" alt="Dermatologue" loading="lazy" />
+        <span>Dermatologue</span>
+      </a>
+
+      <a class="specialty-card" routerLink="/search">
+        <img src="assets/ophtalmologue.svg" alt="Ophtalmologue" loading="lazy" />
+        <span>Ophtalmologue</span>
       </a>
     </div>
   </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section">
+    <div class="section-head center">
+      <span class="section-tag">Comment ça marche</span>
+      <h2>3 étapes simples</h2>
+    </div>
+
+    <div class="steps-grid">
+      <article class="step-card">
+        <div class="step-number">1</div>
+        <img src="assets/rechercher-medecin (2).svg" alt="Rechercher un médecin" loading="lazy" />
+        <h3>Recherchez</h3>
+        <p>Trouvez un médecin par spécialité et disponibilité.</p>
+      </article>
+
+      <article class="step-card">
+        <div class="step-number">2</div>
+        <img src="assets/reserver-creneau (1).svg" alt="Réserver un créneau" loading="lazy" />
+        <h3>Réservez</h3>
+        <p>Sélectionnez un créneau et validez votre rendez-vous.</p>
+      </article>
+
+      <article class="step-card">
+        <div class="step-number">3</div>
+        <img src="assets/recevoir-rappel (1).svg" alt="Recevoir un rappel" loading="lazy" />
+        <h3>Recevez un rappel</h3>
+        <p>Gardez votre rendez-vous en tête grâce à la confirmation.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- IMAGE + TEXT -->
+  <section class="section feature-split">
+    <div class="split-visual">
+      <img
+        src="assets/illustrations/mobile-app-doctor.webp"
+        alt="Application AlloDocteur sur mobile"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="split-content">
+      <span class="section-tag">Une expérience plus fluide</span>
+      <h2>Conçue pour le mobile</h2>
+      <p>
+        Une interface simple, claire et rassurante pour aider les patients à
+        réserver rapidement sans confusion.
+      </p>
+
+      <ul class="mini-list">
+        <li>Recherche rapide</li>
+        <li>Affichage clair des disponibilités</li>
+        <li>Parcours de réservation simplifié</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section alt-section">
+    <div class="section-head center">
+      <span class="section-tag">FAQ</span>
+      <h2>Questions fréquentes</h2>
+    </div>
+
+    <div class="faq-grid">
+      <article class="faq-card">
+        <h3>Comment prendre rendez-vous ?</h3>
+        <p>Choisissez un médecin, sélectionnez un créneau, puis confirmez en ligne.</p>
+      </article>
+
+      <article class="faq-card">
+        <h3>Où le service est-il disponible ?</h3>
+        <p>Actuellement à Dakar, avec une extension progressive vers d’autres villes.</p>
+      </article>
+
+      <article class="faq-card">
+        <h3>Mes informations sont-elles protégées ?</h3>
+        <p>Oui, la confidentialité et la sécurité des données sont prioritaires.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-content">
+      <span class="section-tag light">Commencez maintenant</span>
+      <h2>Prenez votre rendez-vous dès aujourd’hui</h2>
+      <p>Accédez rapidement à une prise de rendez-vous plus simple et plus moderne.</p>
+
+      <div class="hero-actions center-actions">
+        <a mat-flat-button color="primary" routerLink="/search" class="hero-btn">
+          Prendre RDV
+        </a>
+        <a mat-stroked-button routerLink="/contact" class="hero-btn white-btn">
+          Devenir partenaire
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
 

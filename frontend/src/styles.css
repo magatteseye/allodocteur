@@ -31,3 +31,9 @@ body{
 }
 
 a{ color: inherit; }
+
+@media (max-width: 860px) {
+  body {
+    padding-bottom: 96px;
+  }
+}
