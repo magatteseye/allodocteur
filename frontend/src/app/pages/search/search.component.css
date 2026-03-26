@@ -51,10 +51,6 @@
   line-height: 1.05;
 }
 
-.hero-card h1 span {
-  color: var(--primary);
-}
-
 .hero-text {
   margin: 0;
   max-width: 620px;
@@ -84,6 +80,62 @@
   height: 10px;
   border-radius: 999px;
   background: #22c55e;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.primary-link {
+  background: var(--primary);
+  color: #fff;
+}
+
+.secondary-link {
+  background: #eef4ff;
+  color: var(--primary-dark);
+  border: 1px solid var(--border);
+}
+
+/* REASSURANCE */
+.reassurance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.reassurance-card {
+  padding: 22px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+}
+
+.reassurance-card h2 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.reassurance-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
 }
 
 /* SEARCH PANEL */
@@ -138,7 +190,7 @@
   margin-bottom: 14px;
 }
 
-.section-head h3 {
+.section-head h2 {
   margin: 0 0 6px;
   font-size: 1.2rem;
 }
@@ -220,7 +272,7 @@
   margin-bottom: 6px;
 }
 
-.doctor-top h4 {
+.doctor-top h3 {
   margin: 0;
   font-size: 1.08rem;
 }
@@ -296,7 +348,7 @@
   color: var(--primary);
 }
 
-.empty-state h4 {
+.empty-state h3 {
   margin: 0 0 8px;
   color: var(--text);
 }
@@ -319,13 +371,19 @@
     align-items: stretch;
   }
 
-  .search-form {
+  .search-form,
+  .reassurance-grid {
     grid-template-columns: 1fr;
   }
 
   .search-btn,
-  .doctor-btn {
+  .doctor-btn,
+  .hero-link {
     width: 100%;
+  }
+
+  .hero-actions {
+    flex-direction: column;
   }
 }
 

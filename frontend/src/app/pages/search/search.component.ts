@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, computed, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Title, Meta } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
-import { AuthService } from '../../services/auth.service';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -40,31 +40,49 @@ type Doctor = {
 export class SearchComponent implements OnInit {
   loading = signal(true);
   doctors = signal<Doctor[]>([]);
-  specialties = ['Pédiatre','Généraliste','Cardiologue','Neurologie','Sage Femme','Dentiste','Gynécologue'];
+
+  specialties = [
+    'Pédiatre',
+    'Généraliste',
+    'Cardiologue',
+    'Neurologie',
+    'Sage Femme',
+    'Dentiste',
+    'Gynécologue'
+  ];
 
   form = this.fb.group({
     specialty: [''],
     city: ['Dakar'],
   });
 
-  name = computed(() => this.auth.userName());
   fullName = localStorage.getItem('fullName') || 'Invité';
-
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private auth: AuthService,
     private route: ActivatedRoute,
     private router: Router,
+    private title: Title,
+    private meta: Meta
   ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('Prendre rendez-vous médical en ligne au Sénégal | AlloDocteur');
+
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Trouvez un médecin disponible et prenez rendez-vous médical en ligne au Sénégal avec AlloDocteur.'
+    });
+
     this.route.queryParams.subscribe(q => {
-      this.form.patchValue({
-        specialty: q['specialty'] || '',
-        city: q['city'] || 'Dakar',
-      }, { emitEvent: false });
+      this.form.patchValue(
+        {
+          specialty: q['specialty'] || '',
+          city: q['city'] || 'Dakar',
+        },
+        { emitEvent: false }
+      );
 
       this.fetchDoctors();
     });
@@ -74,6 +92,7 @@ export class SearchComponent implements OnInit {
 
   applyToUrl() {
     const v = this.form.value;
+
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
@@ -86,6 +105,7 @@ export class SearchComponent implements OnInit {
 
   fetchDoctors() {
     this.loading.set(true);
+
     this.http.get<Doctor[]>(`${environment.apiUrl}/doctors`).subscribe({
       next: (data) => {
         const v = this.form.value;

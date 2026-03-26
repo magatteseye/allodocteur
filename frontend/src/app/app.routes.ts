@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { AppointmentsComponent } from './pages/appointments/appointments.component';
+import { BlogRdvMedicalSenegalComponent } from './pages/blog-rdv-medical-senegal/blog-rdv-medical-senegal.component';
+import { SearchComponent } from './pages/search/search.component';
 
 
 export const routes: Routes = [
@@ -18,7 +20,14 @@ export const routes: Routes = [
   { path: 'about', loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent) },
   { path: 'rendez-vous', component: AppointmentsComponent },
   { path: 'admin', loadComponent: () => import('./pages/admin/admin.component').then(m => m.AdminComponent) },
-
+  {
+    path: 'blog/comment-prendre-rendez-vous-medical-en-ligne-senegal',
+    component: BlogRdvMedicalSenegalComponent
+  },
+  {
+    path: 'prendre-rendez-vous-medical-en-ligne-senegal',
+    component: SearchComponent
+  },
   { path: '**', redirectTo: '' },
 
   

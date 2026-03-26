@@ -1,23 +1,45 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
+const prisma = require('../prisma');
 
-function requireAuth(req, res, next) {
-  const h = req.headers.authorization || "";
-  const token = h.startsWith("Bearer ") ? h.slice(7) : null;
-  if (!token) return res.status(401).json({ message: "Unauthorized" });
-
+async function auth(req, res, next) {
   try {
-    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({
+        message: 'Token manquant ou invalide.',
+      });
+    }
+
+    const token = authHeader.split(' ')[1];
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.sub },
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+        role: true,
+      },
+    });
+
+    if (!user) {
+      return res.status(401).json({
+        message: 'Utilisateur introuvable.',
+      });
+    }
+
+    req.user = user;
+    req.token = token;
+
     next();
-  } catch {
-    return res.status(401).json({ message: "Invalid token" });
+  } catch (error) {
+    return res.status(401).json({
+      message: 'Authentification invalide.',
+    });
   }
 }
 
-function requireRole(role) {
-  return (req, res, next) => {
-    if (req.user?.role !== role) return res.status(403).json({ message: "Forbidden" });
-    next();
-  };
-}
-
-module.exports = { requireAuth, requireRole };
+module.exports = auth;
